@@ -1,0 +1,76 @@
+{
+  "components": [
+    {
+      "label": "Enter your name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0tiwej7",
+        "columns": null
+      },
+      "id": "Field_0ioikau",
+      "key": "name",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Enter your last name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0j7nead",
+        "columns": null
+      },
+      "id": "Field_010jk2w",
+      "key": "lastName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Enter your ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0l8kt6s",
+        "columns": null
+      },
+      "id": "Field_1lfhqpj",
+      "key": "userId",
+      "validate": {
+        "required": true,
+        "maxLength": "10"
+      }
+    },
+    {
+      "label": "Enter your city",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_017jpdj",
+        "columns": null
+      },
+      "id": "Field_0nvqfaq",
+      "key": "city",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Enter your plan type",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0v0tfut",
+        "columns": null
+      },
+      "id": "Field_1eytsun",
+      "key": "planType"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1nfaq5d",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.23.0",
+  "schemaVersion": 19
+}
