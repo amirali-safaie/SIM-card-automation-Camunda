@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from customer_model import CustomerInfo
+import random
 
 app = FastAPI(title="sim card provision apis")
 
@@ -36,11 +37,12 @@ def store_customer_info(customer_info: CustomerInfo):
     get customer data store it into db
     """
     
-    customer_info_dict = customer_info.model_dump()
+    random_num = random.randint(0,2)
 
-    pass
-    
-    return {"isValidCustomer": True}
+    if random_num < 2:
+        return {"message": "stored"}
+    else:
+        raise HTTPException(status_code=500, message="unable to store data")
         
 
 
@@ -57,19 +59,19 @@ def calculate_bill(customer_info: CustomerInfo):
     return {"isValidCustomer": True}
         
 
-@app.post('/store-bill')
-def store_bill(customer_info: CustomerInfo):
+@app.post('/user-exsit')
+def check_customer_existing(customer_info: CustomerInfo):
     """
     get customer data store it into db
     """
     
-    customer_info_dict = customer_info.model_dump()
+    random_num = random.randint(0,2)
 
-    pass
-    
-    return {"isValidCustomer": True}
+    if random_num < 2:
+        return {"savedCustomer": False}
+    else:
+        return {"savedCustomer": True}
         
-
 
 
 # {
