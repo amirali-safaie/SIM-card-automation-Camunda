@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from customer_model import CustomerInfo
+from customer_model import CustomerInfo, PhoneNumber
 import random
 
 app = FastAPI(title="sim card provision apis")
@@ -83,11 +83,26 @@ def assign_sim_card(customer_info: CustomerInfo):
     random_num = random.randint(0,2)
     print(f'>>>>>>>>>>>>>>>>>>. { random_num}')
     if random_num < 2:
-        return {"assigned": True}
+        return {"phone_number": "09392890534"}
     else:
         raise HTTPException(status_code=400, detail="unable to assign a sim card")
 
         
+@app.post('/sim-card-activation')
+def activate_sim_card(phone_number_info: PhoneNumber):
+    """
+    activate sim card and phone number
+    """
+    
+    random_num = random.randint(0,2)
+    print(f'>>>>>>>>>>>>>>>>>>. { random_num}')
+    if random_num < 2:
+        return {"activate": True}
+    else:
+        raise HTTPException(status_code=400, detail="unable to activate sim card")
+
+        
+
 
 
 # {
