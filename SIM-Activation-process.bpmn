@@ -17,12 +17,12 @@
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
           <zeebe:input source="POST" target="method" />
-          <zeebe:input source="http://127.0.0.1:5000/info-validation" target="url" />
+          <zeebe:input source="http://fastapi:5000/info-validation" target="url" />
           <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_na,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}&#10;" target="body" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_name,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
@@ -30,7 +30,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;isValidCustomer:response.body.isValidCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34; , &#34;error occoured&#34;) else&#10;  null" />
+          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -94,7 +94,7 @@
     </bpmn:callActivity>
     <bpmn:boundaryEvent id="Event_06gyq7v" name="failed" attachedToRef="Activity_1i4ls2u">
       <bpmn:outgoing>Flow_0cwy55s</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_066fh22" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_066fh22" errorRef="Error_0z4qsb1" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0cwy55s" sourceRef="Event_06gyq7v" targetRef="Gateway_0qgqawn" />
     <bpmn:sequenceFlow id="Flow_04inom4" sourceRef="Activity_1o53ooi" targetRef="Event_0ctbde2" />
@@ -115,7 +115,7 @@
     </bpmn:sendTask>
     <bpmn:boundaryEvent id="Event_0idjtrv" name="failed" attachedToRef="Activity_1i8s3jd">
       <bpmn:outgoing>Flow_12n2m36</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_101z0o9" errorRef="Error_11kb2mi" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_101z0o9" errorRef="Error_0z4qsb1" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_12n2m36" sourceRef="Event_0idjtrv" targetRef="Gateway_0qgqawn" />
     <bpmn:sequenceFlow id="Flow_11jfzaa" sourceRef="StartEvent_1" targetRef="Activity_193a515" />
@@ -134,7 +134,7 @@
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
           <zeebe:input source="POST" target="method" />
-          <zeebe:input source="http://localhost:5000/user-exist" target="url" />
+          <zeebe:input source="http://fastapi:5000/user-exist" target="url" />
           <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
@@ -146,8 +146,8 @@
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;savedCustomer:response.body.isValidCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;20&#34; , &#34;error occoured&#34;) else&#10;  null" />
+          <zeebe:header key="resultExpression" value="={&#10;savedCustomer:response.body.savedCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
+          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;20&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -158,6 +158,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="Gateway_0pfvjiv" name="check-exist">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_10sa8zp</bpmn:incoming>
       <bpmn:incoming>Flow_1i3gqag</bpmn:incoming>
       <bpmn:outgoing>Flow_0z53x6p</bpmn:outgoing>
@@ -241,7 +242,7 @@
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
           <zeebe:input source="POST" target="method" />
-          <zeebe:input source="http://localhost:5000/customer-info" target="url" />
+          <zeebe:input source="http://fastapi:5000/customer-info" target="url" />
           <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
@@ -253,8 +254,8 @@
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;message:response.body.message, &#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34; , &#34;error occoured&#34;) else&#10;  null" />
+          <zeebe:header key="resultExpression" value="={&#10;message:response.body.message,&#10;status:response.status&#10;}" />
+          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -306,6 +307,7 @@
   <bpmn:error id="Error_0e7se37" name="validation-error" errorCode="10" />
   <bpmn:error id="Error_11kb2mi" name="update-faild" errorCode="40" />
   <bpmn:error id="Error_1q6d4ie" name="faild-to-check" errorCode="20" />
+  <bpmn:error id="Error_0z4qsb1" name="problem" errorCode="0" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0lw1eff">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -609,7 +611,7 @@
         <di:waypoint x="970" y="222" />
         <di:waypoint x="1060" y="221" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="874" y="253" width="90" height="14" />
+          <dc:Bounds x="925" y="203" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1luk60j_di" bpmnElement="Flow_1luk60j">
