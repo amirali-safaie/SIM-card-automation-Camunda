@@ -42,7 +42,7 @@ def store_customer_info(customer_info: CustomerInfo):
     if random_num < 2:
         return {"message": "stored"}
     else:
-        raise HTTPException(status_code=500, message="unable to store data")
+        raise HTTPException(status_code=500, detail="unable to store data")
         
 
 
@@ -59,7 +59,7 @@ def calculate_bill(customer_info: CustomerInfo):
     return {"isValidCustomer": True}
         
 
-@app.post('/user-exsit')
+@app.post('/user-exist')
 def check_customer_existing(customer_info: CustomerInfo):
     """
     get customer data store it into db
@@ -73,17 +73,33 @@ def check_customer_existing(customer_info: CustomerInfo):
         return {"savedCustomer": True}
         
 
+#...................................................... sim card provision
+@app.post('/sim-card')
+def assign_sim_card(customer_info: CustomerInfo):
+    """
+    get customer data store it into db
+    """
+    
+    random_num = random.randint(0,2)
+    print(f'>>>>>>>>>>>>>>>>>>. { random_num}')
+    if random_num < 2:
+        return {"assigned": True}
+    else:
+        raise HTTPException(status_code=400, detail="unable to assign a sim card")
+
+        
+
 
 # {
 #   "status": 200,
 #   "headers": {
-#     "date": "Tue, 16 Sep 2025 22:31:36 GMT",
-#     "content-length": "24",
+#     "date": "Wed, 17 Sep 2025 07:30:47 GMT",
+#     "content-length": "23",
 #     "server": "uvicorn",
 #     "content-type": "application/json"
 #   },
 #   "body": {
-#     "isValidCustomer": true
+#     "savedCustomer": false
 #   },
 #   "reason": "OK",
 #   "document": null
