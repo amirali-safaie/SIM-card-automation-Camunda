@@ -9,9 +9,9 @@
       <bpmn:incoming>Flow_17baek7</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1c51zzf" name="success" sourceRef="Activity_0betu9r" targetRef="Gateway_0v8p9km" />
-    <bpmn:boundaryEvent id="Event_13cs46b" name="API 500 / System down / time out" attachedToRef="Activity_0betu9r">
+    <bpmn:boundaryEvent id="Event_13cs46b" name="api failed" attachedToRef="Activity_0betu9r">
       <bpmn:outgoing>Flow_15o9mlh</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_02baim9" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_02baim9" errorRef="Error_1p6qyx1" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_15o9mlh" sourceRef="Event_13cs46b" targetRef="Activity_1siyiaj" />
     <bpmn:boundaryEvent id="Event_0pyiv0v" name="48H to solve problem" attachedToRef="Activity_1siyiaj">
@@ -42,9 +42,28 @@
       <bpmn:outgoing>Flow_1vqjhe7</bpmn:outgoing>
     </bpmn:manualTask>
     <bpmn:sequenceFlow id="Flow_1tpfkkx" sourceRef="StartEvent_1" targetRef="Activity_0jkbuod" />
-    <bpmn:serviceTask id="Activity_0jkbuod" name="Assign SIM to customer">
+    <bpmn:serviceTask id="Activity_0jkbuod" name="Assign SIM to customer" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="Assign-Sim-card" />
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/sim-card" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_na,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;status:response.status,&#10;phone_number:response.body.phone_number&#10;}" />
+          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;100&#34;,&#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1tpfkkx</bpmn:incoming>
       <bpmn:outgoing>Flow_17isxwn</bpmn:outgoing>
@@ -59,17 +78,36 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT48H</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_1qz1x83" attachedToRef="Activity_0jkbuod">
+    <bpmn:boundaryEvent id="Event_1qz1x83" name="api failed" attachedToRef="Activity_0jkbuod">
       <bpmn:outgoing>Flow_0o1l0yz</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1nhvgn1" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1nhvgn1" errorRef="Error_0rnav3j" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0o1l0yz" sourceRef="Event_1qz1x83" targetRef="Activity_163pw90" />
     <bpmn:sequenceFlow id="Flow_1akaopa" sourceRef="Event_0pyiv0v" targetRef="Gateway_00oih5v" />
     <bpmn:sequenceFlow id="Flow_0ig4cni" sourceRef="Event_07adt0o" targetRef="Gateway_00oih5v" />
     <bpmn:sequenceFlow id="Flow_0ek229p" sourceRef="Gateway_00oih5v" targetRef="Event_1q56cn0" />
-    <bpmn:serviceTask id="Activity_0betu9r" name="Active SIM card">
+    <bpmn:serviceTask id="Activity_0betu9r" name="Active SIM card" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="provide-SIM" retries="3" />
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/sim-card-activation" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;phone_number&#34;:phone_number,&#10;  &#34;national_code&#34; :national_code&#10;}&#10;" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;status:response.status&#10;}" />
+          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;200&#34;,&#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1mcypys</bpmn:incoming>
       <bpmn:outgoing>Flow_1c51zzf</bpmn:outgoing>
@@ -93,10 +131,11 @@
     <bpmn:sequenceFlow id="Flow_17isxwn" sourceRef="Activity_0jkbuod" targetRef="Gateway_1fl598q" />
     <bpmn:sequenceFlow id="Flow_0w407ip" sourceRef="Activity_163pw90" targetRef="Gateway_1fl598q" />
   </bpmn:process>
-  <bpmn:error id="Error_1ixpwse" name="provide-problem" errorCode="0" />
-  <bpmn:error id="Error_0rnav3j" name="miss-infor" errorCode="20" />
+  <bpmn:error id="Error_1ixpwse" name="problem" errorCode="0" />
+  <bpmn:error id="Error_0rnav3j" name="miss-infor" errorCode="100" />
   <bpmn:escalation id="Escalation_2hmp0nm" name="stock-problem" escalationCode="10" />
   <bpmn:escalation id="Escalation_32oqn31" name="Escalation_32oqn31" escalationCode="ProvisioningWarningCode" />
+  <bpmn:error id="Error_1p6qyx1" name="cant_active" errorCode="200" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0kje7l8">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -126,12 +165,15 @@
           <dc:Bounds x="651" y="245" width="83" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hhx1ow_di" bpmnElement="Activity_1siyiaj" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="890" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0bma9e2_di" bpmnElement="Activity_0jkbuod">
         <dc:Bounds x="220" y="200" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_12ago6e" bpmnElement="Activity_163pw90" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="220" y="350" width="100" height="80" />
+        <dc:Bounds x="220" y="390" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0czmd8x_di" bpmnElement="Activity_0betu9r">
@@ -147,31 +189,31 @@
       <bpmndi:BPMNShape id="Gateway_02impod_di" bpmnElement="Gateway_00oih5v" isMarkerVisible="true">
         <dc:Bounds x="915" y="515" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hhx1ow_di" bpmnElement="Activity_1siyiaj" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="890" y="350" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_09i2k2g_di" bpmnElement="Event_09i2k2g">
         <dc:Bounds x="842" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1qz1x83_di" bpmnElement="Event_1qz1x83">
         <dc:Bounds x="252" y="262" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_10njkz6" bpmnElement="Event_07adt0o">
-        <dc:Bounds x="252" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="299" y="436" width="62" height="27" />
+          <dc:Bounds x="217" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
-        <dc:Bounds x="832" y="262" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_10njkz6" bpmnElement="Event_07adt0o">
+        <dc:Bounds x="252" y="452" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="757" y="305" width="85" height="27" />
+          <dc:Bounds x="299" y="476" width="62" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0pyiv0v_di" bpmnElement="Event_0pyiv0v">
         <dc:Bounds x="922" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="959" y="436" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
+        <dc:Bounds x="832" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1c51zzf_di" bpmnElement="Flow_1c51zzf">
@@ -208,14 +250,14 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0o1l0yz_di" bpmnElement="Flow_0o1l0yz">
         <di:waypoint x="270" y="298" />
-        <di:waypoint x="270" y="350" />
+        <di:waypoint x="270" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1akaopa_di" bpmnElement="Flow_1akaopa">
         <di:waypoint x="940" y="448" />
         <di:waypoint x="940" y="515" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ig4cni_di" bpmnElement="Flow_0ig4cni">
-        <di:waypoint x="270" y="448" />
+        <di:waypoint x="270" y="488" />
         <di:waypoint x="270" y="540" />
         <di:waypoint x="915" y="540" />
       </bpmndi:BPMNEdge>
@@ -233,8 +275,8 @@
         <di:waypoint x="665" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0w407ip_di" bpmnElement="Flow_0w407ip">
-        <di:waypoint x="320" y="390" />
-        <di:waypoint x="690" y="390" />
+        <di:waypoint x="320" y="430" />
+        <di:waypoint x="690" y="430" />
         <di:waypoint x="690" y="265" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

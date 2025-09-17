@@ -81,7 +81,7 @@ def assign_sim_card(customer_info: CustomerInfo):
     """
     
     random_num = random.randint(0,2)
-    print(f'>>>>>>>>>>>>>>>>>>. { random_num}')
+    print(f'.........{random_num}')
     if random_num < 2:
         return {"phone_number": "09392890534"}
     else:
@@ -93,9 +93,9 @@ def activate_sim_card(phone_number_info: PhoneNumber):
     """
     activate sim card and phone number
     """
-    
+    phone_number_info_dict = phone_number_info.model_dump()
+    print(f'.................{phone_number_info_dict.get("phone_number")}')
     random_num = random.randint(0,2)
-    print(f'>>>>>>>>>>>>>>>>>>. { random_num}')
     if random_num < 2:
         return {"activate": True}
     else:
