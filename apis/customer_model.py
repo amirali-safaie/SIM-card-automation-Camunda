@@ -8,3 +8,6 @@ class CustomerInfo(BaseModel):
     plan_type: str | None = None
 
 
+class PhoneNumber(BaseModel):
+    national_code: str | None = None
+    phone_number: str | None = None
