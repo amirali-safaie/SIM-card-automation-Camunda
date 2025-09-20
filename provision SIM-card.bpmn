@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="e6cc5af" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
   <bpmn:process id="Process_0kje7l8" name="provision-SIM-card" isExecutable="true">
     <bpmn:extensionElements />
     <bpmn:startEvent id="StartEvent_1" name="process start">
@@ -37,10 +37,6 @@
       <bpmn:outgoing>Flow_1mcypys</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1mcypys" sourceRef="Gateway_1fl598q" targetRef="Activity_0betu9r" />
-    <bpmn:manualTask id="Activity_1siyiaj" name="Manual Recovery / IT Support">
-      <bpmn:incoming>Flow_15o9mlh</bpmn:incoming>
-      <bpmn:outgoing>Flow_1vqjhe7</bpmn:outgoing>
-    </bpmn:manualTask>
     <bpmn:sequenceFlow id="Flow_1tpfkkx" sourceRef="StartEvent_1" targetRef="Activity_0jkbuod" />
     <bpmn:serviceTask id="Activity_0jkbuod" name="Assign SIM to customer" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
       <bpmn:extensionElements>
@@ -68,10 +64,6 @@
       <bpmn:incoming>Flow_1tpfkkx</bpmn:incoming>
       <bpmn:outgoing>Flow_17isxwn</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:manualTask id="Activity_163pw90" name="Correct errors">
-      <bpmn:incoming>Flow_0o1l0yz</bpmn:incoming>
-      <bpmn:outgoing>Flow_0w407ip</bpmn:outgoing>
-    </bpmn:manualTask>
     <bpmn:boundaryEvent id="Event_07adt0o" name="48H to solve problem" attachedToRef="Activity_163pw90">
       <bpmn:outgoing>Flow_0ig4cni</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1557qli">
@@ -130,6 +122,24 @@
     <bpmn:sequenceFlow id="Flow_0aa93oz" sourceRef="Event_09i2k2g" targetRef="ProvisioningWarning" />
     <bpmn:sequenceFlow id="Flow_17isxwn" sourceRef="Activity_0jkbuod" targetRef="Gateway_1fl598q" />
     <bpmn:sequenceFlow id="Flow_0w407ip" sourceRef="Activity_163pw90" targetRef="Gateway_1fl598q" />
+    <bpmn:userTask id="Activity_163pw90" name="Correct errors">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition candidateUsers="IT, demo" />
+        <zeebe:formDefinition formId="Form_1j7dymb" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0o1l0yz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0w407ip</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1siyiaj" name="Manual Recovery / IT Support">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition candidateUsers="IT, demo" />
+        <zeebe:formDefinition formId="Form_1j7dymb" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15o9mlh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vqjhe7</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:error id="Error_1ixpwse" name="problem" errorCode="0" />
   <bpmn:error id="Error_0rnav3j" name="miss-infor" errorCode="100" />
@@ -165,15 +175,8 @@
           <dc:Bounds x="651" y="245" width="83" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hhx1ow_di" bpmnElement="Activity_1siyiaj" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="890" y="350" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0bma9e2_di" bpmnElement="Activity_0jkbuod">
         <dc:Bounds x="220" y="200" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_12ago6e" bpmnElement="Activity_163pw90" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
-        <dc:Bounds x="220" y="390" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0czmd8x_di" bpmnElement="Activity_0betu9r">
@@ -189,6 +192,12 @@
       <bpmndi:BPMNShape id="Gateway_02impod_di" bpmnElement="Gateway_00oih5v" isMarkerVisible="true">
         <dc:Bounds x="915" y="515" width="50" height="50" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qngrx9_di" bpmnElement="Activity_163pw90" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="220" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g63f8l_di" bpmnElement="Activity_1siyiaj" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="890" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_09i2k2g_di" bpmnElement="Event_09i2k2g">
         <dc:Bounds x="842" y="182" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -196,6 +205,12 @@
         <dc:Bounds x="252" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="217" y="305" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
+        <dc:Bounds x="832" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_10njkz6" bpmnElement="Event_07adt0o">
@@ -208,12 +223,6 @@
         <dc:Bounds x="922" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="959" y="436" width="62" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
-        <dc:Bounds x="832" y="262" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="797" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1c51zzf_di" bpmnElement="Flow_1c51zzf">
@@ -233,7 +242,7 @@
         <di:waypoint x="1010" y="390" />
         <di:waypoint x="1010" y="265" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="994" y="393" width="32" height="14" />
+          <dc:Bounds x="994" y="393" width="33" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17baek7_di" bpmnElement="Flow_17baek7">
