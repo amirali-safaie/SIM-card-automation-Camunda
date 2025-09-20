@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Problem was reviewed and resolved by IT team.",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1homtsn",
+        "columns": null
+      },
+      "id": "Field_0dhot0j",
+      "key": "checkbox_c79p4p"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1j7dymb",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "schemaVersion": 19
+}
