@@ -122,10 +122,7 @@ def update_billing_system(billing_info: BillingInfo):
         raise HTTPException(status_code=400, detail="Missing billing data")
 
     return {
-        "message": "Billing updated",
-        "bill_id": billing_dict.get("bill_id"),
-        "phone_number" : billing_dict.get("phone_number"),
-        "total" : billing_dict.get("total")
+        "message": "saved",
     }
 
 
