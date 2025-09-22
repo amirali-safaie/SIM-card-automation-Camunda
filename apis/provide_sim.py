@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from customer_model import CustomerInfo, PhoneNumber
+from customer_model import CustomerInfo, PhoneNumber, BillingRequest, BillingInfo
 import random
 
 app = FastAPI(title="sim card provision apis")
@@ -45,20 +45,6 @@ def store_customer_info(customer_info: CustomerInfo):
         raise HTTPException(status_code=500, detail="unable to store data")
         
 
-
-@app.post('/bill-calculation')
-def calculate_bill(customer_info: CustomerInfo):
-    """
-    get customer data store it into db
-    """
-    
-    customer_info_dict = customer_info.model_dump()
-
-    pass
-    
-    return {"isValidCustomer": True}
-        
-
 @app.post('/user-exist')
 def check_customer_existing(customer_info: CustomerInfo):
     """
@@ -97,12 +83,53 @@ def activate_sim_card(phone_number_info: PhoneNumber):
     print(f'.................{phone_number_info_dict.get("phone_number")}')
     random_num = random.randint(0,2)
     if random_num < 2:
-        return {"activate": True}
+        return {"activate": True, "phone_number":phone_number_info_dict.get("phone_number")}
     else:
         raise HTTPException(status_code=400, detail="unable to activate sim card")
 
         
+# ...................................................... billing system 
 
+@app.post("/bill-calculation")
+def calculate_bill(request: BillingRequest):
+    """
+    Calculating total bill based on the plan type.
+    """
+    base_price = 150000 if request.plan_type == "D" else 100000
+    tax = int(base_price * 0.09)
+    total = base_price + tax
+
+    return {
+        "message": "Billing calculated",
+        "national_code": request.national_code,
+        "phone_number": request.phone_number,
+        "plan_type": request.plan_type,
+        "bill_id": f"BILL-{random.randint(1000, 9999)}",
+        "total": total
+    }
+
+
+
+
+@app.post('/billing-system-update')
+def update_billing_system(billing_info: BillingInfo):
+    """
+    Update billing system with the calculated bill.
+    """
+    billing_dict = billing_info.model_dump()
+    
+    if not billing_dict.get("bill_id") or not billing_dict.get("total"):
+        raise HTTPException(status_code=400, detail="Missing billing data")
+
+    return {
+        "message": "Billing updated",
+        "bill_id": billing_dict.get("bill_id"),
+        "phone_number" : billing_dict.get("phone_number"),
+        "total" : billing_dict.get("total")
+    }
+
+
+        
 
 
 # {
