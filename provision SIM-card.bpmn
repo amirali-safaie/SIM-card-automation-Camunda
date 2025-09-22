@@ -96,7 +96,7 @@
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;status:response.status&#10;}" />
+          <zeebe:header key="resultExpression" value="={&#10;status:response.status,&#10;  phone_number:response.body.phone_number&#10;}" />
           <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;200&#34;,&#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
@@ -125,7 +125,7 @@
     <bpmn:userTask id="Activity_163pw90" name="Correct errors">
       <bpmn:extensionElements>
         <zeebe:userTask />
-        <zeebe:assignmentDefinition candidateUsers="IT, demo" />
+        <zeebe:assignmentDefinition assignee="" candidateGroups="" candidateUsers="IT, demo" />
         <zeebe:formDefinition formId="Form_1j7dymb" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0o1l0yz</bpmn:incoming>
@@ -207,12 +207,6 @@
           <dc:Bounds x="217" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
-        <dc:Bounds x="832" y="262" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="797" y="305" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_10njkz6" bpmnElement="Event_07adt0o">
         <dc:Bounds x="252" y="452" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -223,6 +217,12 @@
         <dc:Bounds x="922" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="959" y="436" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13cs46b_di" bpmnElement="Event_13cs46b">
+        <dc:Bounds x="832" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="305" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1c51zzf_di" bpmnElement="Flow_1c51zzf">
