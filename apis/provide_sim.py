@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from customer_model import CustomerInfo, PhoneNumber, BillingRequest, BillingInfo
+from customer_model import CustomerInfo, PhoneNumber, BillingRequest, BillingInfo, EmailInfo
 import random
 
 app = FastAPI(title="sim card provision apis")
@@ -117,7 +117,8 @@ def update_billing_system(billing_info: BillingInfo):
     Update billing system with the calculated bill.
     """
     billing_dict = billing_info.model_dump()
-    
+
+    print("here is working at all")
     if not billing_dict.get("bill_id") or not billing_dict.get("total"):
         raise HTTPException(status_code=400, detail="Missing billing data")
 
@@ -127,19 +128,31 @@ def update_billing_system(billing_info: BillingInfo):
 
 
         
+#...................................................................send email
+
+
+@app.post('/customer-notice')
+def send_email_to_customer(mail_info: EmailInfo):
+    """
+    send rejection or confirmation email to customer
+    """
+    return{"message":"email sent"}
+
+@app.post('/IT-notice')
+def send_email_to_IT(customer_info: CustomerInfo):
+    """
+    aware IT team of some problem
+    """
+    return{"message":"email sent"}
+
+
+
 
 
 # {
-#   "status": 200,
-#   "headers": {
-#     "date": "Wed, 17 Sep 2025 07:30:47 GMT",
-#     "content-length": "23",
-#     "server": "uvicorn",
-#     "content-type": "application/json"
-#   },
-#   "body": {
-#     "savedCustomer": false
-#   },
-#   "reason": "OK",
-#   "document": null
+#   "phone_number": null,
+#   "national_code": null,
+#   "total": 109000,
+#   "plan_type": null,
+#   "bill_id": "BILL-6616"
 # }

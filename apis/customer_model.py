@@ -24,3 +24,8 @@ class BillingInfo(BaseModel):
     phone_number: str | None = None
     total: int | None = None
     bill_id: str | None = None
+
+
+class EmailInfo(BaseModel):
+    national_code: str | None = None
+    email_type: str | None = None

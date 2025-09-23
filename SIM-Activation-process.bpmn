@@ -30,7 +30,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;isValidCustomer:response.body.isValidCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -54,13 +54,6 @@
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1ldyv7c" sourceRef="Event_0qsf413" targetRef="Gateway_08gb67m" />
-    <bpmn:sendTask id="Activity_1l26ptn" name="send rejection notice">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="send-reject-notice" retries="4" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1jsrnog</bpmn:incoming>
-      <bpmn:outgoing>Flow_1s4gkim</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:endEvent id="Event_0aj417n" name="rejected">
       <bpmn:incoming>Flow_1s4gkim</bpmn:incoming>
     </bpmn:endEvent>
@@ -107,13 +100,6 @@
       <bpmn:outgoing>Flow_1jsrnog</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1jsrnog" sourceRef="Gateway_0qgqawn" targetRef="Activity_1l26ptn" />
-    <bpmn:sendTask id="Activity_1o53ooi" name="send approaved notice">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="approaved_message" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0zcfjlq</bpmn:incoming>
-      <bpmn:outgoing>Flow_04inom4</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:boundaryEvent id="Event_0idjtrv" name="failed" attachedToRef="Activity_1i8s3jd">
       <bpmn:outgoing>Flow_12n2m36</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_101z0o9" errorRef="Error_0z4qsb1" />
@@ -149,7 +135,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;savedCustomer:response.body.savedCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;20&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;20&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -223,13 +209,6 @@
       <bpmn:outgoing>Flow_04q99ts</bpmn:outgoing>
       <bpmn:escalationEventDefinition id="EscalationEventDefinition_0a73xyp" />
     </bpmn:boundaryEvent>
-    <bpmn:sendTask id="Activity_19b7a6r" name="Inform The IT / network team">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="Inform-It-netwiork-team" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_12f3it3</bpmn:incoming>
-      <bpmn:outgoing>Flow_0zubyo3</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:boundaryEvent id="Event_18h2lxk" name="take long" cancelActivity="false" attachedToRef="Activity_1i8s3jd">
       <bpmn:outgoing>Flow_0jhjzho</bpmn:outgoing>
       <bpmn:escalationEventDefinition id="EscalationEventDefinition_03l4n07" />
@@ -254,7 +233,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -316,6 +295,81 @@
       <bpmn:incoming>Flow_1niqu26</bpmn:incoming>
       <bpmn:outgoing>Flow_1i3gqag</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_19b7a6r" name="Inform The IT / network team" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/IT-notice" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_na,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={message:response.body.message}" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12f3it3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zubyo3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1o53ooi" name="send approaved notice" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/customer-notice" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;confirm&#34;&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={message:response.body.message}" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zcfjlq</bpmn:incoming>
+      <bpmn:outgoing>Flow_04inom4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1l26ptn" name="send rejection notice" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/customer-notice" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;rejecct&#34;&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={message:response.body.message}" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jsrnog</bpmn:incoming>
+      <bpmn:outgoing>Flow_1s4gkim</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:error id="Error_0e7se37" name="validation-error" errorCode="10" />
   <bpmn:error id="Error_11kb2mi" name="update-faild" errorCode="40" />
@@ -341,10 +395,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0f2721x_di" bpmnElement="Activity_1u93qxi" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
         <dc:Bounds x="920" y="640" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1unqnrr_di" bpmnElement="Activity_1l26ptn" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
-        <dc:Bounds x="1840" y="800" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0aj417n_di" bpmnElement="Event_0aj417n">
@@ -373,9 +423,6 @@
       <bpmndi:BPMNShape id="Gateway_0qgqawn_di" bpmnElement="Gateway_0qgqawn" isMarkerVisible="true">
         <dc:Bounds x="1655" y="745" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1nuc0vf_di" bpmnElement="Activity_1o53ooi" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
-        <dc:Bounds x="2020" y="490" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0cadkh9_di" bpmnElement="Activity_193a515">
         <dc:Bounds x="280" y="460" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -402,9 +449,6 @@
       <bpmndi:BPMNShape id="Activity_15dq5e3_di" bpmnElement="Activity_1elvg8u" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
         <dc:Bounds x="1358" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0jni3fk_di" bpmnElement="Activity_19b7a6r" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
-        <dc:Bounds x="2070" y="310" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_02fe0ya" bpmnElement="Activity_0nrmy6j">
         <dc:Bounds x="1358" y="340" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -418,7 +462,7 @@
         <dc:Bounds x="1145" y="745" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1i9nuct_di" bpmnElement="Gateway_1i9nuct" isMarkerVisible="true">
-        <dc:Bounds x="1915" y="325" width="50" height="50" />
+        <dc:Bounds x="1865" y="325" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0noo8w1_di" bpmnElement="Event_0noo8w1">
         <dc:Bounds x="2242" y="332" width="36" height="36" />
@@ -431,6 +475,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1tx7s35_di" bpmnElement="Activity_1wfllgc" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
         <dc:Bounds x="1040" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l97ek9_di" bpmnElement="Activity_19b7a6r" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="2080" y="310" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_034yg18_di" bpmnElement="Activity_1o53ooi" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="2020" y="490" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p8tnoc_di" bpmnElement="Activity_1l26ptn" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1840" y="800" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_019fqfk_di" bpmnElement="Event_019fqfk">
         <dc:Bounds x="1072" y="432" width="36" height="36" />
@@ -615,7 +668,7 @@
       <bpmndi:BPMNEdge id="Flow_04q99ts_di" bpmnElement="Flow_04q99ts">
         <di:waypoint x="1710" y="472" />
         <di:waypoint x="1710" y="350" />
-        <di:waypoint x="1915" y="350" />
+        <di:waypoint x="1865" y="350" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1c7s30x_di" bpmnElement="Flow_1c7s30x">
         <di:waypoint x="970" y="345" />
@@ -657,9 +710,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0jhjzho_di" bpmnElement="Flow_0jhjzho">
         <di:waypoint x="1890" y="472" />
-        <di:waypoint x="1890" y="416" />
-        <di:waypoint x="1940" y="416" />
-        <di:waypoint x="1940" y="375" />
+        <di:waypoint x="1890" y="375" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1vaxh4d" bpmnElement="DataOutputAssociation_1u9d41d">
         <di:waypoint x="1440" y="340" />
@@ -696,11 +747,11 @@
         <di:waypoint x="1655" y="770" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12f3it3_di" bpmnElement="Flow_12f3it3">
-        <di:waypoint x="1965" y="350" />
-        <di:waypoint x="2070" y="350" />
+        <di:waypoint x="1915" y="350" />
+        <di:waypoint x="2080" y="350" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0zubyo3_di" bpmnElement="Flow_0zubyo3">
-        <di:waypoint x="2170" y="350" />
+        <di:waypoint x="2180" y="350" />
         <di:waypoint x="2242" y="350" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

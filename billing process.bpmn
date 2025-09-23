@@ -132,8 +132,8 @@
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;  message:response.body.message&#10;}" />
-          <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;400&#34;,&#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="resultExpression" value="={message:response.body.message}" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;400&#34;,&#34;erroroccurred&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -160,6 +160,12 @@
         <dc:Bounds x="702" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="681" y="145" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fmq03s_di" bpmnElement="Event_1fmq03s">
+        <dc:Bounds x="1032" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1006" y="232" width="89" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_18cixuo_di" bpmnElement="Activity_163pw90" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
@@ -194,12 +200,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zawuto_di" bpmnElement="Activity_1gzviqb">
         <dc:Bounds x="560" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1fmq03s_di" bpmnElement="Event_1fmq03s">
-        <dc:Bounds x="1032" y="262" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1006" y="232" width="89" height="27" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1qmbngw_di" bpmnElement="Event_1qmbngw">
         <dc:Bounds x="602" y="302" width="36" height="36" />
