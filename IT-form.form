@@ -1,10 +1,21 @@
 {
   "components": [
     {
+      "label": "The problem :",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1fqh5k2",
+        "columns": null
+      },
+      "id": "Field_1baj90r",
+      "key": "message",
+      "readonly": true
+    },
+    {
       "label": "Problem was reviewed and resolved by IT team.",
       "type": "checkbox",
       "layout": {
-        "row": "Row_1homtsn",
+        "row": "Row_0nd9ch3",
         "columns": null
       },
       "id": "Field_0dhot0j",
