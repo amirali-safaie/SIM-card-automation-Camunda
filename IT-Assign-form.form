@@ -1,0 +1,44 @@
+{
+  "components": [
+    {
+      "label": "The problem : ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1kpy502",
+        "columns": null
+      },
+      "id": "Field_1gbj2wy",
+      "key": "message",
+      "readonly": true
+    },
+    {
+      "label": "Enter the customer's phone number :",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1areyul",
+        "columns": null
+      },
+      "id": "Field_199z32p",
+      "key": "phone_number"
+    },
+    {
+      "label": "Problem was reviewed and resolved by IT team.",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0k7ussc",
+        "columns": null
+      },
+      "id": "Field_0dlpx7r",
+      "key": "checkbox_qqjdi"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1b36uxq",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "schemaVersion": 19
+}
