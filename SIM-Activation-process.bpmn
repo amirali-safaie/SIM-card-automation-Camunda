@@ -1,84 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="e6cc5af" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
   <bpmn:process id="Process_0lw1eff" name="SIM-Activation-process" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="start event">
-      <bpmn:outgoing>Flow_11jfzaa</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="Gateway_11pbn1d" name="is identity valid">
-      <bpmn:incoming>Flow_1j0nq95</bpmn:incoming>
-      <bpmn:incoming>Flow_14kmd7m</bpmn:incoming>
-      <bpmn:outgoing>Flow_1x64xxf</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0bxgg8c</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_1j0nq95" sourceRef="Activity_16nlr1m" targetRef="Gateway_11pbn1d" />
-    <bpmn:serviceTask id="Activity_16nlr1m" name="Validate information" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
-        <zeebe:ioMapping>
-          <zeebe:input source="noAuth" target="authentication.type" />
-          <zeebe:input source="POST" target="method" />
-          <zeebe:input source="http://fastapi:5000/info-validation" target="url" />
-          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
-          <zeebe:input source="=false" target="storeResponse" />
-          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
-          <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_name,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}" target="body" />
-          <zeebe:input source="=false" target="ignoreNullValues" />
-        </zeebe:ioMapping>
-        <zeebe:taskHeaders>
-          <zeebe:header key="elementTemplateVersion" value="11" />
-          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
-          <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;isValidCustomer:response.body.isValidCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
-        </zeebe:taskHeaders>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0qobgn9</bpmn:incoming>
-      <bpmn:outgoing>Flow_1j0nq95</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1eoaypz" sourceRef="Activity_1i4ls2u" targetRef="Activity_1i8s3jd" />
-    <bpmn:userTask id="Activity_1u93qxi" name="validate information manually">
-      <bpmn:extensionElements>
-        <zeebe:userTask />
-        <zeebe:formDefinition formId="Form_1nfaq5d" />
-        <zeebe:assignmentDefinition candidateUsers="demo, IT" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0bxgg8c</bpmn:incoming>
-      <bpmn:outgoing>Flow_1w177bh</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:boundaryEvent id="Event_0qsf413" name="24H" attachedToRef="Activity_1u93qxi">
       <bpmn:outgoing>Flow_1ldyv7c</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0j1wdfw">
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1ldyv7c" sourceRef="Event_0qsf413" targetRef="Gateway_08gb67m" />
-    <bpmn:endEvent id="Event_0aj417n" name="rejected">
-      <bpmn:incoming>Flow_1s4gkim</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1s4gkim" sourceRef="Activity_1l26ptn" targetRef="Event_0aj417n" />
-    <bpmn:exclusiveGateway id="Gateway_1skz8q8">
-      <bpmn:incoming>Flow_1x64xxf</bpmn:incoming>
-      <bpmn:incoming>Flow_1w177bh</bpmn:incoming>
-      <bpmn:outgoing>Flow_1c7s30x</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_1x64xxf" name="verified" sourceRef="Gateway_11pbn1d" targetRef="Gateway_1skz8q8">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isValidCustomer = true
-</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1w177bh" name="validated" sourceRef="Activity_1u93qxi" targetRef="Gateway_1skz8q8" />
-    <bpmn:endEvent id="Event_0ctbde2" name="SIM card activated successfully">
-      <bpmn:incoming>Flow_04inom4</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0zcfjlq" sourceRef="Activity_1i8s3jd" targetRef="Activity_1o53ooi" />
-    <bpmn:callActivity id="Activity_1i4ls2u" name="Provision SIM card">
+    <bpmn:boundaryEvent id="Event_0zympno" name="24H" attachedToRef="Activity_1eoa8oh">
+      <bpmn:outgoing>Flow_0t8c96m</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0tgt86t">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_019fqfk" name="24H" attachedToRef="Activity_1wfllgc">
+      <bpmn:outgoing>Flow_0ykp055</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_08tis8x">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_1q0uld1" name="48H" attachedToRef="Activity_1elvg8u">
+      <bpmn:outgoing>Flow_1csnxwn</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0y69iqh">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT48H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="ValidationError" name="api error" attachedToRef="Activity_16nlr1m">
       <bpmn:extensionElements>
-        <zeebe:calledElement processId="Process_0kje7l8" propagateAllChildVariables="false" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=&#34;Validation failed.&#34;" target="message" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0zm3der</bpmn:incoming>
-      <bpmn:outgoing>Flow_1eoaypz</bpmn:outgoing>
-    </bpmn:callActivity>
+      <bpmn:outgoing>Flow_1luk60j</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_07j3m41" errorRef="Error_0e7se37" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_0mrzmpj" name="api failed" attachedToRef="Activity_1bon43w">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=&#34;Checking failed&#34;" target="message" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1niqu26</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_057zv97" errorRef="Error_1q6d4ie" />
+    </bpmn:boundaryEvent>
     <bpmn:callActivity id="Activity_1i8s3jd" name="billing process">
       <bpmn:extensionElements>
         <zeebe:calledElement processId="Process_0w8hy1i" propagateAllChildVariables="false" />
@@ -86,36 +50,6 @@
       <bpmn:incoming>Flow_1eoaypz</bpmn:incoming>
       <bpmn:outgoing>Flow_0zcfjlq</bpmn:outgoing>
     </bpmn:callActivity>
-    <bpmn:boundaryEvent id="Event_06gyq7v" name="failed" attachedToRef="Activity_1i4ls2u">
-      <bpmn:outgoing>Flow_0cwy55s</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_066fh22" errorRef="Error_0z4qsb1" />
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_0cwy55s" sourceRef="Event_06gyq7v" targetRef="Gateway_0qgqawn" />
-    <bpmn:sequenceFlow id="Flow_04inom4" sourceRef="Activity_1o53ooi" targetRef="Event_0ctbde2" />
-    <bpmn:exclusiveGateway id="Gateway_0qgqawn">
-      <bpmn:incoming>Flow_0cwy55s</bpmn:incoming>
-      <bpmn:incoming>Flow_12n2m36</bpmn:incoming>
-      <bpmn:incoming>Flow_1csnxwn</bpmn:incoming>
-      <bpmn:incoming>Flow_0a4owru</bpmn:incoming>
-      <bpmn:outgoing>Flow_1jsrnog</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_1jsrnog" sourceRef="Gateway_0qgqawn" targetRef="Activity_1l26ptn" />
-    <bpmn:boundaryEvent id="Event_0idjtrv" name="failed" attachedToRef="Activity_1i8s3jd">
-      <bpmn:outgoing>Flow_12n2m36</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_101z0o9" errorRef="Error_0z4qsb1" />
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_12n2m36" sourceRef="Event_0idjtrv" targetRef="Gateway_0qgqawn" />
-    <bpmn:sequenceFlow id="Flow_11jfzaa" sourceRef="StartEvent_1" targetRef="Activity_193a515" />
-    <bpmn:userTask id="Activity_193a515" name="Get customer details">
-      <bpmn:extensionElements>
-        <zeebe:userTask />
-        <zeebe:formDefinition formId="Form_1nfaq5d" />
-        <zeebe:assignmentDefinition assignee="demo" candidateUsers="" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_11jfzaa</bpmn:incoming>
-      <bpmn:outgoing>Flow_0qobgn9</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0qobgn9" sourceRef="Activity_193a515" targetRef="Activity_16nlr1m" />
     <bpmn:serviceTask id="Activity_1bon43w" name="Check the existanse of the customer" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
@@ -135,7 +69,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;savedCustomer:response.body.savedCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;20&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;20&#34;, &#34;checking the existance failed&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -152,131 +86,96 @@
       <bpmn:outgoing>Flow_0z53x6p</bpmn:outgoing>
       <bpmn:outgoing>Flow_0c7ecb4</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_10sa8zp" sourceRef="Activity_1bon43w" targetRef="Gateway_0pfvjiv" />
-    <bpmn:exclusiveGateway id="Gateway_1uowoph">
-      <bpmn:incoming>Flow_062a8c9</bpmn:incoming>
-      <bpmn:incoming>Flow_0e03rf4</bpmn:incoming>
-      <bpmn:incoming>Flow_0c7ecb4</bpmn:incoming>
-      <bpmn:outgoing>Flow_0zm3der</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:dataStoreReference id="DataStoreReference_042v6ew" name="customers info" />
-    <bpmn:sequenceFlow id="Flow_062a8c9" name="stored" sourceRef="Activity_0nrmy6j" targetRef="Gateway_1uowoph" />
-    <bpmn:sequenceFlow id="Flow_1geds1x" sourceRef="Event_05lmghh" targetRef="Activity_1elvg8u" />
-    <bpmn:sequenceFlow id="Flow_0e03rf4" sourceRef="Activity_1elvg8u" targetRef="Gateway_1uowoph" />
-    <bpmn:sequenceFlow id="Flow_0z53x6p" name="new customer" sourceRef="Gateway_0pfvjiv" targetRef="Activity_0nrmy6j">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=savedCustomer = false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:userTask id="Activity_1elvg8u" name="review and store manually">
-      <bpmn:extensionElements>
-        <zeebe:userTask />
-        <zeebe:formDefinition formId="Form_1nfaq5d" />
-        <zeebe:assignmentDefinition candidateUsers="IT, demo" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1geds1x</bpmn:incoming>
-      <bpmn:outgoing>Flow_0e03rf4</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0c7ecb4" name="customer existed" sourceRef="Gateway_0pfvjiv" targetRef="Gateway_1uowoph">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=savedCustomer = true</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0zm3der" sourceRef="Gateway_1uowoph" targetRef="Activity_1i4ls2u" />
-    <bpmn:sequenceFlow id="Flow_04q99ts" sourceRef="Event_0opizyh" targetRef="Gateway_1i9nuct" />
-    <bpmn:boundaryEvent id="Event_1q0uld1" name="48H" attachedToRef="Activity_1elvg8u">
-      <bpmn:outgoing>Flow_1csnxwn</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0y69iqh">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT48H</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
+    <bpmn:dataStoreReference id="DataStoreReference_1n4pc0z" name="customer info" />
+    <bpmn:dataStoreReference id="DataStoreReference_042v6ew" name="customers info" />
+    <bpmn:endEvent id="Event_0noo8w1" name="end informing">
+      <bpmn:incoming>Flow_0zubyo3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_14kmd7m" name="error resolved" sourceRef="Activity_1eoa8oh" targetRef="Gateway_11pbn1d" />
+    <bpmn:boundaryEvent id="Event_06gyq7v" name="failed" attachedToRef="Activity_1i4ls2u">
+      <bpmn:outgoing>Flow_0cwy55s</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_066fh22" errorRef="Error_0z4qsb1" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_0idjtrv" name="failed" attachedToRef="Activity_1i8s3jd">
+      <bpmn:outgoing>Flow_12n2m36</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_101z0o9" errorRef="Error_0z4qsb1" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_05lmghh" name="failed" attachedToRef="Activity_0nrmy6j">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=&#34;Storing failed&#34;" target="message" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_1geds1x</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_12evz2r" errorRef="Error_0e7se37" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="ValidationError" name="api error" attachedToRef="Activity_16nlr1m">
-      <bpmn:outgoing>Flow_1luk60j</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_07j3m41" errorRef="Error_0e7se37" />
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1c7s30x" name="Is customer new ?" sourceRef="Gateway_1skz8q8" targetRef="Activity_1bon43w" />
-    <bpmn:sequenceFlow id="Flow_1luk60j" sourceRef="ValidationError" targetRef="Activity_1eoa8oh" />
-    <bpmn:sequenceFlow id="Flow_1csnxwn" sourceRef="Event_1q0uld1" targetRef="Gateway_0qgqawn" />
-    <bpmn:boundaryEvent id="Event_0zympno" name="24H" attachedToRef="Activity_1eoa8oh">
-      <bpmn:outgoing>Flow_0t8c96m</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0tgt86t">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_0t8c96m" sourceRef="Event_0zympno" targetRef="Gateway_08gb67m" />
-    <bpmn:sequenceFlow id="Flow_14kmd7m" name="error resolved" sourceRef="Activity_1eoa8oh" targetRef="Gateway_11pbn1d" />
-    <bpmn:boundaryEvent id="Event_0opizyh" name="take long" cancelActivity="false" attachedToRef="Activity_1i4ls2u">
-      <bpmn:outgoing>Flow_04q99ts</bpmn:outgoing>
-      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0a73xyp" />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_18h2lxk" name="take long" cancelActivity="false" attachedToRef="Activity_1i8s3jd">
-      <bpmn:outgoing>Flow_0jhjzho</bpmn:outgoing>
-      <bpmn:escalationEventDefinition id="EscalationEventDefinition_03l4n07" />
-    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_04inom4" sourceRef="Activity_1o53ooi" targetRef="Event_0ctbde2" />
+    <bpmn:sequenceFlow id="Flow_04q99ts" sourceRef="Event_0opizyh" targetRef="Gateway_1i9nuct" />
+    <bpmn:sequenceFlow id="Flow_0a4owru" sourceRef="Gateway_08gb67m" targetRef="Gateway_0qgqawn" />
+    <bpmn:sequenceFlow id="Flow_0cwy55s" sourceRef="Event_06gyq7v" targetRef="Gateway_0qgqawn" />
+    <bpmn:sequenceFlow id="Flow_0e03rf4" sourceRef="Activity_1elvg8u" targetRef="Gateway_1uowoph" />
     <bpmn:sequenceFlow id="Flow_0jhjzho" sourceRef="Event_18h2lxk" targetRef="Gateway_1i9nuct" />
-    <bpmn:serviceTask id="Activity_0nrmy6j" name="store customer information" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
-        <zeebe:ioMapping>
-          <zeebe:input source="noAuth" target="authentication.type" />
-          <zeebe:input source="POST" target="method" />
-          <zeebe:input source="http://fastapi:5000/customer-info" target="url" />
-          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
-          <zeebe:input source="=false" target="storeResponse" />
-          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
-          <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_na,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}&#10;" target="body" />
-          <zeebe:input source="=false" target="ignoreNullValues" />
-        </zeebe:ioMapping>
-        <zeebe:taskHeaders>
-          <zeebe:header key="elementTemplateVersion" value="11" />
-          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
-          <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;message:response.body.message,&#10;status:response.status&#10;}" />
-          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;erroroccurred&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
-        </zeebe:taskHeaders>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0z53x6p</bpmn:incoming>
-      <bpmn:outgoing>Flow_062a8c9</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1u9d41d">
-        <bpmn:targetRef>DataStoreReference_042v6ew</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
-    <bpmn:boundaryEvent id="Event_0mrzmpj" name="api failed" attachedToRef="Activity_1bon43w">
-      <bpmn:outgoing>Flow_1niqu26</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_057zv97" errorRef="Error_1q6d4ie" />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_019fqfk" name="24H" attachedToRef="Activity_1wfllgc">
-      <bpmn:outgoing>Flow_0ykp055</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_08tis8x">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1i3gqag" sourceRef="Activity_1wfllgc" targetRef="Gateway_0pfvjiv" />
-    <bpmn:sequenceFlow id="Flow_0bxgg8c" name="rejected" sourceRef="Gateway_11pbn1d" targetRef="Activity_1u93qxi">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isValidCustomer = false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:dataStoreReference id="DataStoreReference_1n4pc0z" name="customer info" />
-    <bpmn:sequenceFlow id="Flow_1niqu26" sourceRef="Event_0mrzmpj" targetRef="Activity_1wfllgc" />
+    <bpmn:sequenceFlow id="Flow_0qobgn9" sourceRef="Activity_193a515" targetRef="Activity_16nlr1m" />
+    <bpmn:sequenceFlow id="Flow_0t8c96m" sourceRef="Event_0zympno" targetRef="Gateway_08gb67m" />
     <bpmn:sequenceFlow id="Flow_0ykp055" sourceRef="Event_019fqfk" targetRef="Gateway_08gb67m" />
+    <bpmn:sequenceFlow id="Flow_0zcfjlq" sourceRef="Activity_1i8s3jd" targetRef="Activity_1o53ooi" />
+    <bpmn:sequenceFlow id="Flow_0zm3der" sourceRef="Gateway_1uowoph" targetRef="Activity_1i4ls2u" />
+    <bpmn:sequenceFlow id="Flow_0zubyo3" sourceRef="Activity_19b7a6r" targetRef="Event_0noo8w1" />
+    <bpmn:sequenceFlow id="Flow_10sa8zp" sourceRef="Activity_1bon43w" targetRef="Gateway_0pfvjiv" />
+    <bpmn:sequenceFlow id="Flow_11jfzaa" sourceRef="StartEvent_1" targetRef="Activity_193a515" />
+    <bpmn:sequenceFlow id="Flow_12f3it3" sourceRef="Gateway_1i9nuct" targetRef="Activity_19b7a6r" />
+    <bpmn:sequenceFlow id="Flow_12n2m36" sourceRef="Event_0idjtrv" targetRef="Gateway_0qgqawn" />
+    <bpmn:sequenceFlow id="Flow_1csnxwn" sourceRef="Event_1q0uld1" targetRef="Gateway_0qgqawn" />
+    <bpmn:sequenceFlow id="Flow_1eoaypz" sourceRef="Activity_1i4ls2u" targetRef="Activity_1i8s3jd" />
+    <bpmn:sequenceFlow id="Flow_1geds1x" sourceRef="Event_05lmghh" targetRef="Activity_1elvg8u" />
+    <bpmn:sequenceFlow id="Flow_1i3gqag" sourceRef="Activity_1wfllgc" targetRef="Gateway_0pfvjiv" />
+    <bpmn:sequenceFlow id="Flow_1j0nq95" sourceRef="Activity_16nlr1m" targetRef="Gateway_11pbn1d" />
+    <bpmn:sequenceFlow id="Flow_1jsrnog" sourceRef="Gateway_0qgqawn" targetRef="Activity_1l26ptn" />
+    <bpmn:sequenceFlow id="Flow_1ldyv7c" sourceRef="Event_0qsf413" targetRef="Gateway_08gb67m" />
+    <bpmn:sequenceFlow id="Flow_1luk60j" sourceRef="ValidationError" targetRef="Activity_1eoa8oh" />
+    <bpmn:sequenceFlow id="Flow_1niqu26" sourceRef="Event_0mrzmpj" targetRef="Activity_1wfllgc" />
+    <bpmn:sequenceFlow id="Flow_1s4gkim" sourceRef="Activity_1l26ptn" targetRef="Event_0aj417n" />
     <bpmn:exclusiveGateway id="Gateway_08gb67m">
       <bpmn:incoming>Flow_0ykp055</bpmn:incoming>
       <bpmn:incoming>Flow_0t8c96m</bpmn:incoming>
       <bpmn:incoming>Flow_1ldyv7c</bpmn:incoming>
       <bpmn:outgoing>Flow_0a4owru</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0a4owru" sourceRef="Gateway_08gb67m" targetRef="Gateway_0qgqawn" />
+    <bpmn:exclusiveGateway id="Gateway_0qgqawn">
+      <bpmn:incoming>Flow_0cwy55s</bpmn:incoming>
+      <bpmn:incoming>Flow_12n2m36</bpmn:incoming>
+      <bpmn:incoming>Flow_1csnxwn</bpmn:incoming>
+      <bpmn:incoming>Flow_0a4owru</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jsrnog</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="Gateway_1i9nuct">
       <bpmn:incoming>Flow_04q99ts</bpmn:incoming>
       <bpmn:incoming>Flow_0jhjzho</bpmn:incoming>
       <bpmn:outgoing>Flow_12f3it3</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_12f3it3" sourceRef="Gateway_1i9nuct" targetRef="Activity_19b7a6r" />
-    <bpmn:endEvent id="Event_0noo8w1" name="end informing">
-      <bpmn:incoming>Flow_0zubyo3</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0zubyo3" sourceRef="Activity_19b7a6r" targetRef="Event_0noo8w1" />
+    <bpmn:exclusiveGateway id="Gateway_1skz8q8">
+      <bpmn:incoming>Flow_1x64xxf</bpmn:incoming>
+      <bpmn:incoming>Flow_1w177bh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c7s30x</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_1uowoph">
+      <bpmn:incoming>Flow_062a8c9</bpmn:incoming>
+      <bpmn:incoming>Flow_0e03rf4</bpmn:incoming>
+      <bpmn:incoming>Flow_0c7ecb4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zm3der</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_193a515" name="Get customer details">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_1nfaq5d" />
+        <zeebe:assignmentDefinition assignee="demo" candidateUsers="" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11jfzaa</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qobgn9</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:userTask id="Activity_1eoa8oh" name="Handle errors">
       <bpmn:extensionElements>
         <zeebe:userTask />
@@ -320,6 +219,38 @@
       <bpmn:incoming>Flow_12f3it3</bpmn:incoming>
       <bpmn:outgoing>Flow_0zubyo3</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1c7s30x" name="Is customer new ?" sourceRef="Gateway_1skz8q8" targetRef="Activity_1bon43w" />
+    <bpmn:exclusiveGateway id="Gateway_11pbn1d" name="is identity valid">
+      <bpmn:incoming>Flow_1j0nq95</bpmn:incoming>
+      <bpmn:incoming>Flow_14kmd7m</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x64xxf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0bxgg8c</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0z53x6p" name="new customer" sourceRef="Gateway_0pfvjiv" targetRef="Activity_0nrmy6j">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=savedCustomer = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:callActivity id="Activity_1i4ls2u" name="Provision SIM card">
+      <bpmn:extensionElements>
+        <zeebe:calledElement processId="Process_0kje7l8" propagateAllChildVariables="false" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zm3der</bpmn:incoming>
+      <bpmn:outgoing>Flow_1eoaypz</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="Event_0aj417n" name="rejected">
+      <bpmn:incoming>Flow_1s4gkim</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0bxgg8c" name="rejected" sourceRef="Gateway_11pbn1d" targetRef="Activity_1u93qxi">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isValidCustomer = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_1elvg8u" name="review and store manually">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_1nfaq5d" />
+        <zeebe:assignmentDefinition candidateUsers="IT, demo" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1geds1x</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e03rf4</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_1o53ooi" name="send approaved notice" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
@@ -370,6 +301,90 @@
       <bpmn:incoming>Flow_1jsrnog</bpmn:incoming>
       <bpmn:outgoing>Flow_1s4gkim</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0ctbde2" name="SIM card activated successfully">
+      <bpmn:incoming>Flow_04inom4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_1" name="start event">
+      <bpmn:outgoing>Flow_11jfzaa</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_0nrmy6j" name="store customer information" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/customer-info" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_na,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}&#10;" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;message:response.body.message,&#10;status:response.status&#10;}" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;Storing the customer failed&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0z53x6p</bpmn:incoming>
+      <bpmn:outgoing>Flow_062a8c9</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1u9d41d">
+        <bpmn:targetRef>DataStoreReference_042v6ew</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_062a8c9" name="stored" sourceRef="Activity_0nrmy6j" targetRef="Gateway_1uowoph" />
+    <bpmn:boundaryEvent id="Event_0opizyh" name="take long" cancelActivity="false" attachedToRef="Activity_1i4ls2u">
+      <bpmn:outgoing>Flow_04q99ts</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0a73xyp" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_18h2lxk" name="take long" cancelActivity="false" attachedToRef="Activity_1i8s3jd">
+      <bpmn:outgoing>Flow_0jhjzho</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_03l4n07" />
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="Activity_16nlr1m" name="Validate information" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/info-validation" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_name,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="11" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;isValidCustomer:response.body.isValidCustomer, &#10;message:response.body.message,&#10;status:response.status&#10;}" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;10&#34;, &#34;validation failed&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0qobgn9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j0nq95</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1u93qxi" name="validate information manually">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_1nfaq5d" />
+        <zeebe:assignmentDefinition candidateUsers="demo, IT" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bxgg8c</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w177bh</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1w177bh" name="validated" sourceRef="Activity_1u93qxi" targetRef="Gateway_1skz8q8" />
+    <bpmn:sequenceFlow id="Flow_1x64xxf" name="verified" sourceRef="Gateway_11pbn1d" targetRef="Gateway_1skz8q8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isValidCustomer = true
+</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmn:error id="Error_0e7se37" name="validation-error" errorCode="10" />
   <bpmn:error id="Error_11kb2mi" name="update-faild" errorCode="40" />
@@ -524,7 +539,7 @@
       <bpmndi:BPMNShape id="BPMNShape_0yc09pr" bpmnElement="Event_05lmghh">
         <dc:Bounds x="1390" y="402" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1377" y="453" width="27" height="14" />
+          <dc:Bounds x="1378" y="453" width="26" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1q0uld1_di" bpmnElement="Event_1q0uld1">
