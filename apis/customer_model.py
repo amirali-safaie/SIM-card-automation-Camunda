@@ -1,5 +1,12 @@
 from pydantic import BaseModel
 
+
+class BaseCustomerInfo(BaseModel):
+    national_code: str| None = None
+    email: str|None = None
+
+
+
 class CustomerInfo(BaseModel):
     f_name: str | None = None
     l_name: str | None = None

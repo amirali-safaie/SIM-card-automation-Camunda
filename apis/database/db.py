@@ -1,4 +1,4 @@
-people_data = [
+customer_data = [
     # Ali Rezaei - 5 phone numbers
     ["1234567890", "Ali", "Rezaei", "Tehran", "D", "09123456789", "ali.rezaei@example.com"],
     ["1234567890", "Ali", "Rezaei", "Tehran", "D", "09123456790", "ali.rezaei@example.com"],

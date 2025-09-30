@@ -1,8 +1,38 @@
 from fastapi import FastAPI, HTTPException
-from customer_model import CustomerInfo, PhoneNumber, BillingRequest, BillingInfo, EmailInfo
+from customer_model import (
+    CustomerInfo, 
+    PhoneNumber, 
+    BillingRequest, 
+    BillingInfo, 
+    EmailInfo,
+    BaseCustomerInfo
+)
+from database.db import customer_data
 import random
+import smtplib
+from email.message import EmailMessage
+
 
 app = FastAPI(title="sim card provision apis")
+
+
+@app.post('/shahkar')
+def check_shahkar(customer_info: BaseCustomerInfo):
+    """
+    check that this natinal code is able to get number or not 
+    """
+    customer_info_dict = customer_info.model_dump()
+    national_code = customer_info_dict.get("national_code")
+    
+    phone_number_counter = 0
+    for customer in customer_data:
+        if customer[0] == national_code:
+            phone_number_counter += 1 
+
+    if phone_number_counter >= 10:
+        return {"can_buy": False, "message":"too much phone_number for this person"}
+    
+    return {"can_buy":True}
 
 @app.post('/info-validation')
 def validate_customer_info(customer_info: CustomerInfo):
@@ -136,7 +166,32 @@ def send_email_to_customer(mail_info: EmailInfo):
     """
     send rejection or confirmation email to customer
     """
-    return{"message":"email sent"}
+    mail_info_dict = mail_info.model_dump()
+
+    msg = EmailMessage()
+    if mail_info_dict.get("email_type") == "confirmation":
+        msg["Subject"] = "buy confirmation"
+    msg["Subject"] = "buy rejection"
+    msg["From"] = "amirali.safa2004@gmail.com"
+    msg["To"] = "amirali.safie@gmail.com"
+    msg.set_content("Hello, this is a test email sent from MTN to announce you")
+
+
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+
+
+    email = "amirali.safa2004@gmail.com"
+    password = "tjzh oyvr wrhl cxqe" 
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()  # Secure the connection
+            server.login(email, password)
+            server.send_message(msg)
+        return{"message":"email sent"}
+    except Exception as e:
+        print("Error sending email:", e)
+        raise HTTPException(status_code=400, detail="unable to activate sim card")
 
 @app.post('/IT-notice')
 def send_email_to_IT(customer_info: CustomerInfo):
