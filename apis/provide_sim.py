@@ -11,6 +11,9 @@ from database.db import customer_data
 import random
 import smtplib
 from email.message import EmailMessage
+import re
+# pattern = r'^\d{10}$'
+#     return bool(re.match(pattern, input_string))
 
 
 app = FastAPI(title="sim card provision apis")
@@ -199,8 +202,6 @@ def send_email_to_IT(customer_info: CustomerInfo):
     aware IT team of some problem
     """
     return{"message":"email sent"}
-
-
 
 
 
