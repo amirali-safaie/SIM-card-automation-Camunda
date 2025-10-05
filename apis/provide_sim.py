@@ -5,7 +5,10 @@ from customer_model import (
     BillingRequest, 
     BillingInfo, 
     EmailInfo,
-    BaseCustomerInfo
+    BaseCustomerInfo,
+    NA,
+    Email,
+    OTPModel
 )
 from database.db import customer_data
 import random
@@ -19,23 +22,7 @@ import re
 app = FastAPI(title="sim card provision apis")
 
 
-@app.post('/shahkar')
-def check_shahkar(customer_info: BaseCustomerInfo):
-    """
-    check that this natinal code is able to get number or not 
-    """
-    customer_info_dict = customer_info.model_dump()
-    national_code = customer_info_dict.get("national_code")
-    
-    phone_number_counter = 0
-    for customer in customer_data:
-        if customer[0] == national_code:
-            phone_number_counter += 1 
 
-    if phone_number_counter >= 10:
-        return {"can_buy": False, "message":"too much phone_number for this person"}
-    
-    return {"can_buy":True}
 
 @app.post('/info-validation')
 def validate_customer_info(customer_info: CustomerInfo):
@@ -212,3 +199,63 @@ def send_email_to_IT(customer_info: CustomerInfo):
 #   "plan_type": null,
 #   "bill_id": "BILL-6616"
 # }
+
+
+#CEM..............................................
+
+OTP_code:str = "2347"
+@app.post('/NA-validation')
+def validate_NA(national_code: NA):
+    """
+    get national code and check it to be valid
+    """
+    national_code_dict = national_code.model_dump()
+    
+    if national_code_dict.get("national_code"):
+        national_code = national_code_dict.get("national_code")
+        if len(national_code) != 10:
+            return {"isValid": False, "message":"national code is invalid"}
+
+    
+    return {"isValid": True}
+
+
+
+
+
+@app.post('/shahkar')
+def check_shahkar(customer_info: BaseCustomerInfo):
+    """
+    check that this natinal code is able to get number or not 
+    """
+    customer_info_dict = customer_info.model_dump()
+    national_code = customer_info_dict.get("national_code")
+    
+    phone_number_counter = 0
+    for customer in customer_data:
+        if customer[0] == national_code:
+            phone_number_counter += 1 
+
+    if phone_number_counter >= 10:
+        return {"can_buy": False, "message":"too much phone_number for this person"}
+    
+    return {"can_buy":True}
+
+
+@app.post('/shahkar')
+def check_shahkar(customer_info: BaseCustomerInfo):
+    """
+    check that this natinal code is able to get number or not 
+    """
+    customer_info_dict = customer_info.model_dump()
+    national_code = customer_info_dict.get("national_code")
+    
+    phone_number_counter = 0
+    for customer in customer_data:
+        if customer[0] == national_code:
+            phone_number_counter += 1 
+
+    if phone_number_counter >= 10:
+        return {"can_buy": False, "message":"too much phone_number for this person"}
+    
+    return {"can_buy":True}
