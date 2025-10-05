@@ -46,3 +46,8 @@ class Email(BaseModel):
 
 class OTPModel(BaseModel):
     OTP_code: str | None = None
+
+
+
+class SimCardInfo(BaseModel):
+    plan_type: str | None = None

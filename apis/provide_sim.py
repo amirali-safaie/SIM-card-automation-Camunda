@@ -8,7 +8,8 @@ from customer_model import (
     BaseCustomerInfo,
     NA,
     Email,
-    OTPModel
+    OTPModel,
+    SimCardInfo
 )
 from database.db import customer_data
 import random
@@ -65,19 +66,6 @@ def store_customer_info(customer_info: CustomerInfo):
         raise HTTPException(status_code=500, detail="unable to store data")
         
 
-@app.post('/user-exist')
-def check_customer_existing(customer_info: CustomerInfo):
-    """
-    get customer data store it into db
-    """
-    
-    random_num = random.randint(0,2)
-
-    if random_num < 2:
-        return {"savedCustomer": False}
-    else:
-        return {"savedCustomer": True}
-        
 
 #...................................................... sim card provision
 @app.post('/sim-card')
@@ -146,6 +134,24 @@ def update_billing_system(billing_info: BillingInfo):
         "message": "saved",
     }
 
+@app.post("/payment")
+def pay_cost(sim_info: SimCardInfo):
+    """
+    simulate payment gateway
+    """
+    sim_info_dict = sim_info.model_dump()
+    plan_type = sim_info_dict.get("plan_type")
+
+    base_price = 150000 if plan_type == "D" else 100000
+    tax = int(base_price * 0.09)
+    total = base_price + tax
+
+    return {
+        "message": "payed",
+        "plan_type": plan_type,
+        "pay_id": f"BILL-{random.randint(1000, 9999)}",
+        "total": total
+    }
 
         
 #...................................................................send email
@@ -182,6 +188,7 @@ def send_email_to_customer(mail_info: EmailInfo):
     except Exception as e:
         print("Error sending email:", e)
         raise HTTPException(status_code=400, detail="unable to activate sim card")
+    
 
 @app.post('/IT-notice')
 def send_email_to_IT(customer_info: CustomerInfo):
@@ -190,15 +197,6 @@ def send_email_to_IT(customer_info: CustomerInfo):
     """
     return{"message":"email sent"}
 
-
-
-# {
-#   "phone_number": null,
-#   "national_code": null,
-#   "total": 109000,
-#   "plan_type": null,
-#   "bill_id": "BILL-6616"
-# }
 
 
 #CEM..............................................
@@ -214,7 +212,7 @@ def validate_NA(national_code: NA):
     if national_code_dict.get("national_code"):
         national_code = national_code_dict.get("national_code")
         if len(national_code) != 10:
-            return {"isValid": False, "message":"national code is invalid"}
+            raise HTTPException(status_code=400, detail="NA code isnt correct ")
 
     
     return {"isValid": True}
