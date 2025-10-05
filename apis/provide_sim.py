@@ -220,6 +220,38 @@ def validate_NA(national_code: NA):
     return {"isValid": True}
 
 
+@app.post('/OTP')
+def send_OTP(customer_email: Email):
+    """
+    get email and send OTP
+    """
+    customer_email_dict = customer_email.model_dump()
+    des_email = customer_email_dict.get("email")
+
+
+    msg = EmailMessage()
+    msg["Subject"] = "OTP code"
+    msg["From"] = "amirali.safa2004@gmail.com"
+    msg["To"] = des_email
+    msg.set_content("this is your OTP code : "+OTP_code)
+
+
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+
+
+    email = "amirali.safa2004@gmail.com"
+    password = "tjzh oyvr wrhl cxqe" 
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()  # Secure the connection
+            server.login(email, password)
+            server.send_message(msg)
+        return{"message":"email sent"}
+    except Exception as e:
+        print("Error sending email:", e)
+        raise HTTPException(status_code=500, detail="unable to activate sim card")
+
 
 
 
