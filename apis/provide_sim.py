@@ -203,7 +203,7 @@ def send_email_to_IT(customer_info: CustomerInfo):
 
 #CEM..............................................
 
-OTP_code:str = "2347"
+OTP_code_generated:str = "2347"
 @app.post('/NA-validation')
 def validate_NA(national_code: NA):
     """
@@ -274,20 +274,15 @@ def check_shahkar(customer_info: BaseCustomerInfo):
     return {"can_buy":True}
 
 
-@app.post('/shahkar')
-def check_shahkar(customer_info: BaseCustomerInfo):
+@app.post('/OTP-validation')
+def check_OTP(OTP_code: OTPModel):
     """
-    check that this natinal code is able to get number or not 
+    get otp and validate it 
     """
-    customer_info_dict = customer_info.model_dump()
-    national_code = customer_info_dict.get("national_code")
+    OTP_code_dict = OTP_code.model_dump()
+    code = OTP_code_dict.get("OTP_code")
     
-    phone_number_counter = 0
-    for customer in customer_data:
-        if customer[0] == national_code:
-            phone_number_counter += 1 
-
-    if phone_number_counter >= 10:
-        return {"can_buy": False, "message":"too much phone_number for this person"}
+    if code == OTP_code_generated:
+        return {"isValid": False, "message":"code is valid"}
     
-    return {"can_buy":True}
+    raise HTTPException(status_code=400, detail="code isnt correcct")
