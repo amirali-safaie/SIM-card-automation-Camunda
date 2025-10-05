@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Enter the OTP",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06b58ea",
+        "columns": null
+      },
+      "id": "Field_0lk9iq4",
+      "key": "otp"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1mezlp7",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "schemaVersion": 19
+}
