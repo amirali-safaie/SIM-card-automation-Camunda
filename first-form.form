@@ -1,0 +1,33 @@
+{
+  "components": [
+    {
+      "label": "Enter your national code",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0mi6kwm",
+        "columns": null
+      },
+      "id": "Field_0bo0lli",
+      "key": "national_code"
+    },
+    {
+      "label": "Enter your email",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0bh21a3",
+        "columns": null
+      },
+      "id": "Field_01v64vs",
+      "key": "email"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0h5byt2",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "schemaVersion": 19
+}
