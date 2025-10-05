@@ -58,12 +58,17 @@ def store_customer_info(customer_info: CustomerInfo):
     get customer data store it into db
     """
     
-    random_num = random.randint(0,2)
-
-    if random_num < 2:
-        return {"message": "stored"}
-    else:
-        raise HTTPException(status_code=500, detail="unable to store data")
+    customer_info_dict = customer_info.model_dump()
+    f_name = customer_info_dict.get("f_name")
+    l_name = customer_info_dict.get("l_name")
+    national_code = customer_info_dict.get("national_code")
+    city = customer_info_dict.get("city")
+    plan_type = customer_info_dict.get("plan_type")
+    phone_number = customer_info_dict.get("phone_number")
+    email = customer_info_dict.get("email")
+    customer_data.append([national_code, f_name, l_name, city, plan_type, phone_number, email])
+    
+    return {"message":"stored"}
         
 
 

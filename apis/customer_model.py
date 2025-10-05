@@ -14,6 +14,7 @@ class CustomerInfo(BaseModel):
     city: str | None = None
     plan_type: str | None = None
     phone_number: str | None = None
+    email: str | None = None
 
 
 class PhoneNumber(BaseModel):
