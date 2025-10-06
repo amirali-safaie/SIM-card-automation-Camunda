@@ -88,7 +88,7 @@
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;confirmation&#34;&#10;}" target="body" />
+          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;confirmation&#34;,&#10;  &#34;email&#34;:email&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
@@ -188,12 +188,16 @@
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;f_name&#34;:f_name,&#10;  &#34;l_name&#34; :l_name,&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;city&#34; :city,&#10;  &#34;plan_type&#34; :plan_type,&#10;  &#34;phone_number&#34;:phone_number,&#10;  &#34;email&#34;:email&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;  message:response.body.message&#10;}" />
+          <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;0&#34;, &#34;&#34;) &#10;else &#10;  null" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mec1eb</bpmn:incoming>

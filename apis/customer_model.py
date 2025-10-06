@@ -38,6 +38,7 @@ class BillingInfo(BaseModel):
 class EmailInfo(BaseModel):
     national_code: str | None = None
     email_type: str | None = None
+    email:str
 
 class NA(BaseModel):
     national_code: str | None = None

@@ -67,7 +67,7 @@ def store_customer_info(customer_info: CustomerInfo):
     phone_number = customer_info_dict.get("phone_number")
     email = customer_info_dict.get("email")
     customer_data.append([national_code, f_name, l_name, city, plan_type, phone_number, email])
-    
+    print(f'new database is : \n {customer_data}')
     return {"message":"stored"}
         
 
@@ -168,13 +168,15 @@ def send_email_to_customer(mail_info: EmailInfo):
     send rejection or confirmation email to customer
     """
     mail_info_dict = mail_info.model_dump()
+    email = mail_info_dict.get("email")
 
     msg = EmailMessage()
     if mail_info_dict.get("email_type") == "confirmation":
         msg["Subject"] = "buy confirmation"
-    msg["Subject"] = "buy rejection"
+    else:
+        msg["Subject"] = "buy rejection"
     msg["From"] = "amirali.safa2004@gmail.com"
-    msg["To"] = "amirali.safie@gmail.com"
+    msg["To"] = email
     msg.set_content("Hello, this is a test email sent from MTN to announce you")
 
 
@@ -207,6 +209,7 @@ def send_email_to_IT(customer_info: CustomerInfo):
 #CEM..............................................
 
 OTP_code_generated:str = "2347"
+
 @app.post('/NA-validation')
 def validate_NA(national_code: NA):
     """
@@ -230,6 +233,8 @@ def send_OTP(customer_email: Email):
     """
     customer_email_dict = customer_email.model_dump()
     des_email = customer_email_dict.get("email")
+    global OTP_code_generated
+    OTP_code_generated = str(random.randint(1000,9999))
 
 
     msg = EmailMessage()
@@ -257,6 +262,22 @@ def send_OTP(customer_email: Email):
 
 
 
+@app.post('/OTP-validation')
+def check_OTP(OTP_code: OTPModel):
+    """
+    get otp and validate it 
+    """
+
+    OTP_code_dict = OTP_code.model_dump()
+    code = OTP_code_dict.get("OTP_code")
+    
+    if code == OTP_code_generated:
+        print("hello its here ")
+        return {"validOTP": True, "message":"code is valid"}
+    
+    return {"validOTP": False, "message":"code is not valid"} 
+
+
 
 @app.post('/shahkar')
 def check_shahkar(customer_info: BaseCustomerInfo):
@@ -277,16 +298,3 @@ def check_shahkar(customer_info: BaseCustomerInfo):
     return {"canActive":True, "message":"user can buy another phone number"}
 
 
-@app.post('/OTP-validation')
-def check_OTP(OTP_code: OTPModel):
-    """
-    get otp and validate it 
-    """
-    OTP_code_dict = OTP_code.model_dump()
-    code = OTP_code_dict.get("OTP_code")
-    
-    if code == OTP_code_generated:
-        print("hello its here ")
-        return {"validOTP": True, "message":"code is valid"}
-    
-    return {"validOTP": False, "message":"code is not valid"} 
