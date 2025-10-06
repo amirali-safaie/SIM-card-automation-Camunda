@@ -25,7 +25,7 @@
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;status:api_response.status,&#10;message:api_response.body.message&#10;}" />
           <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;2&#34;,&#34;&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_06on4sx</bpmn:incoming>
@@ -60,7 +60,7 @@
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;status:api_response.status,&#10;message:api_response.body.message,&#10;validOTP:response.body.validOTP&#10;}" />
           <zeebe:header key="errorExpression" value="=if api_response.status != 200 then &#10;  bpmnError(&#34;3&#34;,&#34;&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
         <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
       </bpmn:extensionElements>
@@ -86,7 +86,7 @@
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;status:api_response.status,&#10;canActive:response.body.canActive&#10;}" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1eojg67</bpmn:incoming>

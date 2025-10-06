@@ -3,7 +3,7 @@
   <bpmn:process id="Process_0lw1eff" name="SIM-Activation-process" isExecutable="true">
     <bpmn:callActivity id="Activity_1i8s3jd" name="billing process">
       <bpmn:extensionElements>
-        <zeebe:calledElement processId="Process_0w8hy1i" propagateAllChildVariables="false" />
+        <zeebe:calledElement processId="Process_0w8hy1i" propagateAllChildVariables="true" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1eoaypz</bpmn:incoming>
       <bpmn:outgoing>Flow_0mec1eb</bpmn:outgoing>
@@ -69,7 +69,7 @@
     </bpmn:serviceTask>
     <bpmn:callActivity id="Activity_1i4ls2u" name="Provision SIM card">
       <bpmn:extensionElements>
-        <zeebe:calledElement processId="Process_0kje7l8" propagateAllChildVariables="false" />
+        <zeebe:calledElement processId="Process_0kje7l8" propagateAllChildVariables="true" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ydma48</bpmn:incoming>
       <bpmn:outgoing>Flow_1eoaypz</bpmn:outgoing>
@@ -143,7 +143,7 @@
     </bpmn:boundaryEvent>
     <bpmn:callActivity id="Activity_11tz4ys" name="CRM">
       <bpmn:extensionElements>
-        <zeebe:calledElement processId="Process_1d2y2uj" propagateAllChildVariables="false" />
+        <zeebe:calledElement processId="Process_1d2y2uj" propagateAllChildVariables="true" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_11jfzaa</bpmn:incoming>
       <bpmn:outgoing>Flow_1j7v9t2</bpmn:outgoing>
@@ -154,17 +154,21 @@
         <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
-          <zeebe:input source="GET" target="method" />
-          <zeebe:input target="url" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/payment" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;plan_type&#34;:plan_type&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="resultVariable" value="api_response" />
+          <zeebe:header key="resultExpression" value="={&#10;total:response.body.total,&#10;pay_id:response.body.pay_id&#10;}" />
+          <zeebe:header key="retryBackoff" value="PT10M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1j7v9t2</bpmn:incoming>
@@ -178,8 +182,9 @@
         <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
-          <zeebe:input source="GET" target="method" />
-          <zeebe:input target="url" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://fastapi:5000/customer-info" target="url" />
+          <zeebe:input source="={&#34;Content-Type&#34;:&#34;application/json&#34;}" target="headers" />
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
@@ -224,8 +229,20 @@
         <dc:Bounds x="1020" y="260" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0noo8w1_di" bpmnElement="Event_0noo8w1">
+        <dc:Bounds x="1842" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1827" y="145" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0qgqawn_di" bpmnElement="Gateway_0qgqawn" isMarkerVisible="true">
         <dc:Bounds x="975" y="515" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1i9nuct_di" bpmnElement="Gateway_1i9nuct" isMarkerVisible="true">
+        <dc:Bounds x="1445" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l97ek9_di" bpmnElement="Activity_19b7a6r" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1660" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_06pn0eh_di" bpmnElement="Activity_1i4ls2u">
         <dc:Bounds x="780" y="260" width="100" height="80" />
@@ -266,17 +283,11 @@
         <dc:Bounds x="1210" y="260" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0noo8w1_di" bpmnElement="Event_0noo8w1">
-        <dc:Bounds x="1842" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1827" y="145" width="67" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Event_0cvsp96_di" bpmnElement="Event_0cvsp96">
+        <dc:Bounds x="1242" y="242" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0l97ek9_di" bpmnElement="Activity_19b7a6r" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
-        <dc:Bounds x="1660" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1i9nuct_di" bpmnElement="Gateway_1i9nuct" isMarkerVisible="true">
-        <dc:Bounds x="1445" y="95" width="50" height="50" />
+      <bpmndi:BPMNShape id="Event_1s61frg_di" bpmnElement="Event_1s61frg">
+        <dc:Bounds x="582" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0gwvt9d_di" bpmnElement="Event_0gwvt9d">
         <dc:Bounds x="372" y="322" width="36" height="36" />
@@ -304,12 +315,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="797" y="365" width="27" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1s61frg_di" bpmnElement="Event_1s61frg">
-        <dc:Bounds x="602" y="322" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0cvsp96_di" bpmnElement="Event_0cvsp96">
-        <dc:Bounds x="1242" y="242" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_04inom4_di" bpmnElement="Flow_04inom4">
         <di:waypoint x="1520" y="300" />
@@ -384,11 +389,10 @@
         <di:waypoint x="975" y="540" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1g4c97v_di" bpmnElement="Flow_1g4c97v">
-        <di:waypoint x="620" y="358" />
-        <di:waypoint x="620" y="378" />
-        <di:waypoint x="560" y="378" />
-        <di:waypoint x="560" y="270" />
-        <di:waypoint x="580" y="270" />
+        <di:waypoint x="600" y="358" />
+        <di:waypoint x="600" y="390" />
+        <di:waypoint x="660" y="390" />
+        <di:waypoint x="660" y="340" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1dgu64z_di" bpmnElement="Flow_1dgu64z">
         <di:waypoint x="1260" y="242" />
