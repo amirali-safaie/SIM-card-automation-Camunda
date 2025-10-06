@@ -236,7 +236,7 @@ def send_OTP(customer_email: Email):
     msg["Subject"] = "OTP code"
     msg["From"] = "amirali.safa2004@gmail.com"
     msg["To"] = des_email
-    msg.set_content("this is your OTP code : "+OTP_code)
+    msg.set_content("this is your OTP code : "+OTP_code_generated)
 
 
     smtp_server = "smtp.gmail.com"
@@ -253,7 +253,7 @@ def send_OTP(customer_email: Email):
         return{"message":"email sent"}
     except Exception as e:
         print("Error sending email:", e)
-        raise HTTPException(status_code=500, detail="unable to activate sim card")
+        raise HTTPException(status_code=500)
 
 
 
@@ -272,9 +272,9 @@ def check_shahkar(customer_info: BaseCustomerInfo):
             phone_number_counter += 1 
 
     if phone_number_counter >= 10:
-        return {"can_buy": False, "message":"too much phone_number for this person"}
+        return {"canActive": False, "message":"too much phone_number for this person"}
     
-    return {"can_buy":True}
+    return {"canActive":True, "message":"user can buy another phone number"}
 
 
 @app.post('/OTP-validation')
@@ -286,6 +286,7 @@ def check_OTP(OTP_code: OTPModel):
     code = OTP_code_dict.get("OTP_code")
     
     if code == OTP_code_generated:
-        return {"isValid": False, "message":"code is valid"}
+        print("hello its here ")
+        return {"validOTP": True, "message":"code is valid"}
     
-    raise HTTPException(status_code=400, detail="code isnt correcct")
+    return {"validOTP": False, "message":"code is not valid"} 
