@@ -34,7 +34,7 @@
         "columns": null
       },
       "id": "Field_0nvqfaq",
-      "key": "national_code",
+      "key": "city",
       "validate": {
         "required": true
       }
