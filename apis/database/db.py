@@ -1,3 +1,5 @@
+from datetime import datetime
+
 customer_data = [
     # Ali Rezaei - 5 phone numbers
     ["1234567890", "Ali", "Rezaei", "Tehran", "D", "09123456789", "ali.rezaei@example.com"],
@@ -31,4 +33,10 @@ customer_data = [
     ["8899001122", "Niloofar", "Ghasemi", "Karaj", "D", "09201234567", "niloofar.ghasemi@example.com"],
     ["2233445566", "Omid", "Rahimi", "Yazd", "E", "09441234567", "omid.rahimi@example.com"],
     ["4455667788", "Amir", "Tavakoli", "Bandar Abbas", "D", "09229997766", "amir.tavakoli@example.com"]
+]
+
+bills = [
+    ["1234567890", "09123456789", "D", 0, datetime(2025, 10, 1, 10, 30)],
+    ["0987654321", "09234567890", "E", 0, datetime(2025, 10, 2, 14, 45)],
+    ["1122334455", "09345678901", "D", 0, datetime(2025, 10, 3, 9, 15)]
 ]
