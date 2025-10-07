@@ -11,10 +11,11 @@ from customer_model import (
     OTPModel,
     SimCardInfo
 )
-from database.db import customer_data
+from database.db import customer_data,bills
 import random
 import smtplib
 from email.message import EmailMessage
+from datetime import datetime
 import re
 # pattern = r'^\d{10}$'
 #     return bool(re.match(pattern, input_string))
@@ -31,20 +32,16 @@ def validate_customer_info(customer_info: CustomerInfo):
     Get customer data and validate it with a cleaner manual approach.
     """
     customer_info_dict = customer_info.model_dump()
-    required_fields = {"f_name", "l_name", "city", "plan_type", "national_code"}
+    required_fields = {"f_name", "l_name", "city", "plan_type"}
     
     
     for field in required_fields:
         if not customer_info_dict.get(field):
             print("bad request for field ",field)
-            raise HTTPException(status_code=400, detail="Invalid customer info: Missing field")
-
+            raise HTTPException(status_code=400, detail=f"Invalid customer info: Missing or empty field '{field}'")
    
-    national_code = customer_info_dict.get("national_code")
     plan_type = customer_info_dict.get("plan_type")
     print(f'reccied :::: {customer_info_dict}')
-    if len(national_code) != 10:
-        return {"isValidCustomer": False, "message":"national code is invalid"}
 
     if plan_type not in ("D", "E"):
         return {"isValidCustomer": False, "message":"plan type undifined"}
@@ -106,38 +103,42 @@ def activate_sim_card(phone_number_info: PhoneNumber):
 @app.post("/bill-calculation")
 def calculate_bill(request: BillingRequest):
     """
-    Calculating total bill based on the plan type.
+    Calculate bill and create bill object with customer info and creation timestamp.
     """
-    base_price = 150000 if request.plan_type == "D" else 100000
-    tax = int(base_price * 0.09)
-    total = base_price + tax
-
-    return {
-        "message": "Billing calculated",
+    
+    bill = {
         "national_code": request.national_code,
         "phone_number": request.phone_number,
         "plan_type": request.plan_type,
-        "bill_id": f"BILL-{random.randint(1000, 9999)}",
-        "total": total
+        "total": 0,
+        "created_at": datetime.now()
     }
-
-
-
+    
+    return {
+        "message": "Billing calculated",
+        "national_code": bill.get("national_code"),
+        "phone_number": bill.get("phone_number"),
+        "plan_type":bill.get("plan_type"),
+        "total": bill.get("total"),
+        "created_at": bill.get("created_at")
+    }
 
 @app.post('/billing-system-update')
 def update_billing_system(billing_info: BillingInfo):
     """
-    Update billing system with the calculated bill.
+    Update billing system by storing bill in array using same pattern as customer info.
     """
-    billing_dict = billing_info.model_dump()
-
-    print("here is working at all")
-    if not billing_dict.get("bill_id") or not billing_dict.get("total"):
-        raise HTTPException(status_code=400, detail="Missing billing data")
-
-    return {
-        "message": "saved",
-    }
+    billing_info_dict = billing_info.model_dump()
+    national_code = billing_info_dict.get("national_code")
+    phone_number = billing_info_dict.get("phone_number")
+    plan_type = billing_info_dict.get("plan_type")
+    total = billing_info_dict.get("total")
+    created_at = billing_info_dict.get("created_at")
+    
+    bills.append([national_code, phone_number, plan_type, total, created_at])
+    print(f'new database is : \n {bills}')
+    
+    return {"message": "Billinf system updated"}
 
 @app.post("/payment")
 def pay_cost(sim_info: SimCardInfo):
