@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from datetime import datetime
+
 
 
 class BaseCustomerInfo(BaseModel):
@@ -32,7 +34,7 @@ class BillingInfo(BaseModel):
     plan_type: str | None = None
     phone_number: str | None = None
     total: int | None = None
-    bill_id: str | None = None
+    created_at: datetime | None = None
 
 
 class EmailInfo(BaseModel):
