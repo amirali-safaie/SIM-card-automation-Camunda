@@ -8,7 +8,10 @@
         "columns": null
       },
       "id": "Field_0lk9iq4",
-      "key": "otp"
+      "key": "otp",
+      "validate": {
+        "required": true
+      }
     }
   ],
   "type": "default",
