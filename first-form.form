@@ -8,7 +8,10 @@
         "columns": null
       },
       "id": "Field_0bo0lli",
-      "key": "national_code"
+      "key": "national_code",
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Enter your email",
@@ -18,7 +21,10 @@
         "columns": null
       },
       "id": "Field_01v64vs",
-      "key": "email"
+      "key": "email",
+      "validate": {
+        "required": true
+      }
     }
   ],
   "type": "default",
