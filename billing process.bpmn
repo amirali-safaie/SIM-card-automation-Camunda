@@ -59,7 +59,7 @@
           <zeebe:header key="elementTemplateVersion" value="11" />
           <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
           <zeebe:header key="resultVariable" value="api_response" />
-          <zeebe:header key="resultExpression" value="={&#10;  message: response.body.message,&#10;  national_code: response.body.national_code,&#10;  phone_number: response.body.phone_number,&#10;  plan_type: response.body.plan_type,&#10;  bill_id: response.body.bill_id,&#10;  total: response.body.total,&#10;  status: response.status&#10;}&#10;&#10;" />
+          <zeebe:header key="resultExpression" value="={&#10;  message: response.body.message,&#10;  national_code: response.body.national_code,&#10;  phone_number: response.body.phone_number,&#10;  plan_type: response.body.plan_type,&#10;  total: response.body.total,&#10;  status: response.status,&#10;  created_at:response.body.created_at&#10;}&#10;&#10;" />
           <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;300&#34;,&#34;Evaluation and bill calv]culation failed&#34;) &#10;else &#10;  null" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
@@ -134,7 +134,7 @@
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;national_code&#34;: national_code,&#10;  &#34;plan_type&#34;: plan_type,&#10;  &#34;phone_number&#34;: phone_number,&#10;  &#34;total&#34;: total,&#10;  &#34;bill_id&#34;: bill_id&#10;}" target="body" />
+          <zeebe:input source="={&#10;  &#34;national_code&#34;: national_code,&#10;  &#34;plan_type&#34;: plan_type,&#10;  &#34;phone_number&#34;: phone_number,&#10;  &#34;total&#34;: total,&#10;  &#34;created_at&#34;: created_at&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
@@ -291,6 +291,11 @@
         <di:waypoint x="825" y="280" />
         <di:waypoint x="1032" y="280" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0vqqfj2_di" bpmnElement="DataOutputAssociation_0vqqfj2">
+        <di:waypoint x="640" y="240" />
+        <di:waypoint x="640" y="210" />
+        <di:waypoint x="695" y="210" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1pc5c6m_di" bpmnElement="Flow_1pc5c6m">
         <di:waypoint x="600" y="222" />
         <di:waypoint x="600" y="150" />
@@ -300,11 +305,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="505" y="196" width="90" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0vqqfj2_di" bpmnElement="DataOutputAssociation_0vqqfj2">
-        <di:waypoint x="640" y="240" />
-        <di:waypoint x="640" y="210" />
-        <di:waypoint x="695" y="210" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
