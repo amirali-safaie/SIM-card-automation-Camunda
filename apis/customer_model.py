@@ -44,6 +44,7 @@ class EmailInfo(BaseModel):
 
 class NA(BaseModel):
     national_code: str | None = None
+    email:str
 
 class Email(BaseModel):
     email: str | None = None
