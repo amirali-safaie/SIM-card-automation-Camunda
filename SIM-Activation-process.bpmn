@@ -206,7 +206,7 @@
     <bpmn:sequenceFlow id="Flow_0b504sj" sourceRef="Activity_1uabvrt" targetRef="Activity_1o53ooi" />
     <bpmn:boundaryEvent id="Event_0gwvt9d" attachedToRef="Activity_11tz4ys">
       <bpmn:outgoing>Flow_1utb8gx</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1jodqp9" errorRef="Error_0z4qsb1" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1jodqp9" errorRef="Error_07ixci7" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1utb8gx" sourceRef="Event_0gwvt9d" targetRef="Gateway_0qgqawn" />
     <bpmn:boundaryEvent id="Event_1s61frg" attachedToRef="Activity_05mp2zp">
@@ -227,6 +227,7 @@
   <bpmn:error id="Error_1q6d4ie" name="faild-to-check" errorCode="20" />
   <bpmn:error id="Error_0z4qsb1" name="problem" errorCode="0" />
   <bpmn:escalation id="Escalation_3mr2o7q" name="take_long" escalationCode="0" />
+  <bpmn:error id="Error_07ixci7" name="CRM-failed" errorCode="1" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0lw1eff">
       <bpmndi:BPMNShape id="Activity_0if58bv_di" bpmnElement="Activity_1i8s3jd">
@@ -326,8 +327,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_04q99ts_di" bpmnElement="Flow_04q99ts">
         <di:waypoint x="830" y="242" />
-        <di:waypoint x="830" y="50" />
-        <di:waypoint x="1470" y="50" />
+        <di:waypoint x="830" y="70" />
+        <di:waypoint x="1470" y="70" />
         <di:waypoint x="1470" y="95" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0cwy55s_di" bpmnElement="Flow_0cwy55s">
@@ -400,8 +401,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1dgu64z_di" bpmnElement="Flow_1dgu64z">
         <di:waypoint x="1260" y="242" />
-        <di:waypoint x="1260" y="200" />
-        <di:waypoint x="1470" y="200" />
+        <di:waypoint x="1260" y="170" />
+        <di:waypoint x="1470" y="170" />
         <di:waypoint x="1470" y="145" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
