@@ -197,10 +197,12 @@ def validate_NA(national_code: NA):
         raise HTTPException(status_code=400, detail="NA code isnt correct ")
 
     
-    if national_code_dict.get("national_code"):
-        national_code = national_code_dict.get("national_code")
-        if len(national_code) != 10:
-            raise HTTPException(status_code=400, detail="NA code isnt correct ")
+    if not national_code_dict.get("national_code"):
+        raise HTTPException(status_code=400, detail="NA code isnt correct ")
+    
+    national_code = national_code_dict.get("national_code")
+    if len(national_code) != 10:
+        raise HTTPException(status_code=400, detail="NA code isnt correct ")
 
     
     return {"isValid": True}
