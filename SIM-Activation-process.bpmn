@@ -113,7 +113,7 @@
           <zeebe:input source="=false" target="storeResponse" />
           <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="=20" target="readTimeoutInSeconds" />
-          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;rejecction&#34;&#10;}" target="body" />
+          <zeebe:input source="={&#10;  &#34;national_code&#34; :national_code,&#10;  &#34;email_type&#34;:&#34;rejecction&#34;,&#10;  &#34;email&#34;:email&#10;}" target="body" />
           <zeebe:input source="=false" target="ignoreNullValues" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
