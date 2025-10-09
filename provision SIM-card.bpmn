@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="e6cc5af" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
   <bpmn:process id="Process_0kje7l8" name="provision-SIM-card" isExecutable="true">
     <bpmn:extensionElements />
     <bpmn:boundaryEvent id="Event_0pyiv0v" name="48H to solve problem" attachedToRef="Activity_1siyiaj">
@@ -11,7 +11,7 @@
     <bpmn:boundaryEvent id="Event_07adt0o" name="48H to solve problem" attachedToRef="Activity_163pw90">
       <bpmn:outgoing>Flow_0ig4cni</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1557qli">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT48H</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT2S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:serviceTask id="Activity_0betu9r" name="Active SIM card" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="11" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
@@ -34,7 +34,7 @@
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;status:response.status,&#10;  phone_number:response.body.phone_number&#10;}" />
           <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;200&#34;,&#34;Activation for SIM failed&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1mcypys</bpmn:incoming>
@@ -78,7 +78,7 @@
           <zeebe:header key="resultVariable" value="api_response" />
           <zeebe:header key="resultExpression" value="={&#10;status:response.status,&#10;phone_number:response.body.phone_number&#10;}" />
           <zeebe:header key="errorExpression" value="=if response.status != 200 then &#10;  bpmnError(&#34;100&#34;,&#34;API assignment failed&#34;) &#10;else &#10;  null" />
-          <zeebe:header key="retryBackoff" value="PT0S" />
+          <zeebe:header key="retryBackoff" value="PT5M" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1tpfkkx</bpmn:incoming>
@@ -134,9 +134,9 @@
       <bpmn:incoming>Flow_15o9mlh</bpmn:incoming>
       <bpmn:outgoing>Flow_1vqjhe7</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="Event_1q56cn0" name="problem">
+    <bpmn:endEvent id="Event_1q56cn0" name="provision-failed">
       <bpmn:incoming>Flow_0ek229p</bpmn:incoming>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0qlrc3s" errorRef="Error_1ixpwse" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0qlrc3s" errorRef="Error_0y2q7jr" />
     </bpmn:endEvent>
     <bpmn:startEvent id="StartEvent_1" name="process start">
       <bpmn:outgoing>Flow_1tpfkkx</bpmn:outgoing>
@@ -151,11 +151,14 @@
     <bpmn:sequenceFlow id="Flow_1vqjhe7" name="solved" sourceRef="Activity_1siyiaj" targetRef="Gateway_0v8p9km" />
     <bpmn:sequenceFlow id="Flow_1c51zzf" name="success" sourceRef="Activity_0betu9r" targetRef="Gateway_0v8p9km" />
   </bpmn:process>
-  <bpmn:error id="Error_1ixpwse" name="problem" errorCode="0" />
+  <bpmn:error id="Error_1ixpwse" name="problem" errorCode="500" />
   <bpmn:error id="Error_0rnav3j" name="miss-infor" errorCode="100" />
   <bpmn:escalation id="Escalation_2hmp0nm" name="stock-problem" escalationCode="10" />
   <bpmn:escalation id="Escalation_32oqn31" name="Escalation_32oqn31" escalationCode="ProvisioningWarningCode" />
   <bpmn:error id="Error_1p6qyx1" name="cant_active" errorCode="200" />
+  <bpmn:error id="Error_0y2q7jr" name="provision-failed" errorCode="2" />
+  <bpmn:error id="Error_1tp4pk5" name="Error_2qqbnh3" />
+  <bpmn:error id="Error_0kffh5t" name="Error_0eupt9l" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0kje7l8">
       <bpmndi:BPMNShape id="Activity_0czmd8x_di" bpmnElement="Activity_0betu9r">
@@ -187,7 +190,7 @@
       <bpmndi:BPMNShape id="Event_1q56cn0_di" bpmnElement="Event_1q56cn0">
         <dc:Bounds x="1122" y="522" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1120" y="565" width="41" height="14" />
+          <dc:Bounds x="1104" y="565" width="74" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -288,7 +291,7 @@
         <di:waypoint x="1010" y="390" />
         <di:waypoint x="1010" y="265" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="994" y="393" width="33" height="14" />
+          <dc:Bounds x="1014" y="373" width="32" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1c51zzf_di" bpmnElement="Flow_1c51zzf">
