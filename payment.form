@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "text": "# Dear customer, since you have chosen the {{plan_type}} plan, please pay {{amount}}.\n# Thank you.",
+      "type": "text",
+      "layout": {
+        "row": "Row_0ri1m27",
+        "columns": null
+      },
+      "id": "Field_0284jrz"
+    }
+  ],
+  "type": "default",
+  "id": "Form_108qbnv",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.7.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.39.0"
+  },
+  "schemaVersion": 19
+}
