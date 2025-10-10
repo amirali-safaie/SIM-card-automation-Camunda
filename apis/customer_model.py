@@ -41,10 +41,10 @@ class EmailInfo(BaseModel):
     national_code: str | None = None
     email_type: str | None = None
     email:str
+    phone_number: str | None = None
 
 class NA(BaseModel):
     national_code: str | None = None
-    email:str
 
 class Email(BaseModel):
     email: str | None = None
