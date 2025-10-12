@@ -17,8 +17,8 @@ import smtplib
 from email.message import EmailMessage
 from datetime import datetime
 import re
-# pattern = r'^\d{10}$'
-#     return bool(re.match(pattern, input_string))
+
+phone_number_counter = 9000000000 #stored in some file or db  
 
 
 app = FastAPI(title="sim card provision apis")
@@ -73,13 +73,15 @@ def store_customer_info(customer_info: CustomerInfo):
 @app.post('/sim-card')
 def assign_sim_card(customer_info: CustomerInfo):
     """
-    get customer data store it into db
+    get customer data and assign a phone number to this customer
     """
-    
+    global phone_number_counter
+
+    phone_number_counter += 1
     random_num = random.randint(0,2)
     print(f'.........{random_num}')
     if random_num < 2:
-        return {"phone_number": "09392890534"}
+        return {"phone_number": str(phone_number_counter)}
     else:
         raise HTTPException(status_code=400, detail="unable to assign a sim card")
 
