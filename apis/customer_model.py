@@ -1,6 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
-
 
 
 class BaseCustomerInfo(BaseModel):
@@ -38,10 +37,10 @@ class BillingInfo(BaseModel):
 
 
 class EmailInfo(BaseModel):
-    national_code: str | None = None
-    email_type: str | None = None
-    email:str
-    phone_number: str | None = None
+    national_code: str | None = Field(default=None, description="National code")
+    email_type: str | None = Field(default="rejection", description="Email type")
+    email: str = Field(..., description="Email address") 
+    phone_number: str | None = Field(default='None', description="Phone number")
 
 class NA(BaseModel):
     national_code: str | None = None
