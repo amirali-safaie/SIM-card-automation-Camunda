@@ -40,7 +40,7 @@
       }
     },
     {
-      "label": "Enter your plan type",
+      "label": "Enter your plan type (D for Postpaid and E for Prepaid)",
       "type": "textfield",
       "layout": {
         "row": "Row_0v0tfut",
