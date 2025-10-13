@@ -25,30 +25,6 @@ app = FastAPI(title="sim card provision apis")
 
 
 
-
-@app.post('/info-validation')
-def validate_customer_info(customer_info: CustomerInfo):
-    """
-    Get customer data and validate it with a cleaner manual approach.
-    """
-    customer_info_dict = customer_info.model_dump()
-    required_fields = {"f_name", "l_name", "city", "plan_type"}
-    
-    
-    for field in required_fields:
-        if not customer_info_dict.get(field):
-            print("bad request for field ",field)
-            raise HTTPException(status_code=400, detail=f"Invalid customer info: Missing or empty field '{field}'")
-   
-    plan_type = customer_info_dict.get("plan_type")
-    print(f'reccied :::: {customer_info_dict}')
-
-    if plan_type not in ("D", "E"):
-        return {"isValidCustomer": False, "message":"plan type undifined"}
-    
-    return {"isValidCustomer": True}
-
-
 @app.post('/customer-info')
 def store_customer_info(customer_info: CustomerInfo):
     """
@@ -594,6 +570,33 @@ def send_email_to_IT(customer_info: CustomerInfo):
 #CEM..............................................
 
 OTP_code_generated:str = "2347"
+
+
+
+
+@app.post('/info-validation')
+def validate_customer_info(customer_info: CustomerInfo):
+    """
+    Get customer data and validate it with a cleaner manual approach.
+    """
+    customer_info_dict = customer_info.model_dump()
+    required_fields = {"f_name", "l_name", "city", "plan_type"}
+    
+    
+    for field in required_fields:
+        if not customer_info_dict.get(field):
+            print("bad request for field ",field)
+            raise HTTPException(status_code=400, detail=f"Invalid customer info: Missing or empty field '{field}'")
+   
+    plan_type = customer_info_dict.get("plan_type")
+    print(f'reccied :::: {customer_info_dict}')
+
+    if plan_type not in ("D", "E"):
+        return {"isValidCustomer": False, "message":"plan type undifined"}
+    
+    return {"isValidCustomer": True}
+
+
 
 @app.post('/NA-validation')
 def validate_NA(national_code: NA):
