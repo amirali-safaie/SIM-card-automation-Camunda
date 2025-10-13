@@ -32,6 +32,9 @@ change the docker compose file of cammunda to include your Fastapi dockerfile
 run the docker compose (by docker or podman)     
 `sudo docker compose up -d`
 
+your apis will expose to `localhost:5000`  
+you can see, and test them in `http://localhost:5000/docs`
+
 ---
 then you can import and run flow and monitor them in operate and optimize and ...
 here is the list of services:
