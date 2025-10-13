@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "text": "# Dear customer, since you have chosen the {{plan_type}} plan, please pay {{amount}}.\n# Thank you.",
+      "text": "# Dear customer, since you have chosen the {{plan_type_display}} plan, please pay {{amount}}.\n# Thank you.",
       "type": "text",
       "layout": {
         "row": "Row_0ri1m27",
