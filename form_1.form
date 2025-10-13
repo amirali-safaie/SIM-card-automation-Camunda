@@ -40,14 +40,26 @@
       }
     },
     {
-      "label": "Enter your plan type (D for Postpaid and E for Prepaid)",
-      "type": "textfield",
+      "label": "Choose your plan type",
+      "values": [
+        {
+          "label": "Postpaid",
+          "value": "D"
+        },
+        {
+          "label": "Prepaid",
+          "value": "E"
+        }
+      ],
+      "type": "select",
       "layout": {
-        "row": "Row_0v0tfut",
+        "row": "Row_0cwhs2x",
         "columns": null
       },
-      "id": "Field_1eytsun",
+      "id": "Field_0t8phxk",
       "key": "plan_type",
+      "defaultValue": "D",
+      "searchable": false,
       "validate": {
         "required": true
       }
